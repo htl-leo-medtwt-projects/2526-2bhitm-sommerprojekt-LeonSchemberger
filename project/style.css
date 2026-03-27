@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+}
+
+/* ==================================================
+                      Start Screen
+================================================== */
+
+#start-menu {
+    height: 100vh;
+    width: 100%;
+    background: url(img/Backgrounds/StartScreen.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#start
+
+/* ==================================================
+                        Buttons
+================================================== */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2 ease-in;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button img{
+    width: 400px;
+}
+
+#menu-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
