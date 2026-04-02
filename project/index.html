@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,74 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <!-- ---------------Start Screen--------------- -->
     <section id="start-menu">
-        <div class="logo"></div>
-        <div id="menu-btns">
-            <button id="play-btn" onclick="CreateCharakter()">
-                <img src="img/Btns/PlayBtn.png">
-            </button>
-            <a href="html/info.html">
-                <button id="howto-btn" >
-                    <img src="img/Btns/HowToBtn.png">
+        <div id="start-content">
+            <div class="logo">
+                <img src="img/UI Panels/Logo.png">
+            </div>
+
+            <div id="menu-btns">
+                <button id="play-btn" onclick="createCharakter()">
+                    <img src="img/Btns/PlayBtn.png">
                 </button>
-            </a>
+                <a href="html/info.html">
+                    <button id="howto-btn">
+                        <img src="img/Btns/HowToBtn.png">
+                    </button>
+                </a>
+            </div>
         </div>
     </section>
 
+    <!-- ---------------Create Charakter--------------- -->
+    <section id="char-creator">
+        <h1>Create your Player</h1>
+        <div id="char-content">
+            <div class="inputs">
+                <input type="text" placeholder="Name..." id="player-name">
+                <input type="number" placeholder="Alter..." id="player-age" readonly>
+
+                <select id="team-select">
+                    <option value="" disabled selected>Team wählen...</option>
+
+                    <option value="haas">Haas F1 Team (Kostenlos)</option>
+                    <option value="sauber">Audi (Kostenlos)</option>
+                    <option value="williams">Williams (Kostenlos)</option>
+
+                    <option value="cadillac" disabled>Cadillac - 250.000 €</option>
+                    <option value="alpine" disabled>Alpine - 500.000 €</option>
+                    <option value="rb" disabled>Racing Bulls - 750.000 €</option>
+                    <option value="aston" disabled>Aston Martin - 1.200.000 €</option>
+                    <option value="mercedes" disabled>Mercedes - 2.500.000 €</option>
+                    <option value="mclaren" disabled>McLaren - 3.000.000 €</option>
+                    <option value="ferrari" disabled>Ferrari - 4.500.000 €</option>
+                    <option value="redbull" disabled>Red Bull Racing - 6.000.000 €</option>
+                </select>
+            </div>
+
+            <div class="character-cards">
+                <div class="char-card" onclick="setAge(19)">
+                    <img src="img/Looks/Look1-young.png" class="char-img">
+                </div>
+                <div class="char-card2" onclick="setAge(30)">
+                    <img src="img/Looks/Look2-old.png" class="char-img">
+                </div>
+                <div class="char-card3" onclick="setAge(23)">
+                    <img src="img/Looks/Look3-dark.png" class="char-img">
+                </div>
+            </div>
+
+            <button id="save-btn" onclick="savePlayer()">
+                <img src="img/Btns/SaveBtn.png">
+            </button>
+        </div>
+    </section>
+
+
 </body>
+
 </html>
