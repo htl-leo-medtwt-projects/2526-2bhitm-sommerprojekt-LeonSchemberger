@@ -14,7 +14,7 @@
     <!-- ---------------Start Screen--------------- -->
     <section id="start-menu">
         <div id="start-content">
-            <div class="logo">
+            <div id="logo-start">
                 <img src="img/UI Panels/Logo.png">
             </div>
 
@@ -58,19 +58,76 @@
             </div>
 
             <div class="character-cards">
-                <div class="char-card" onclick="setAge(19)">
+                <div id="char-card1" onclick="setAge(19)">
                     <img src="img/Looks/Look1-young.png" class="char-img">
                 </div>
-                <div class="char-card2" onclick="setAge(30)">
+                <div id="char-card2" onclick="setAge(30)">
                     <img src="img/Looks/Look2-old.png" class="char-img">
                 </div>
-                <div class="char-card3" onclick="setAge(23)">
+                <div id="char-card3" onclick="setAge(23)">
                     <img src="img/Looks/Look3-dark.png" class="char-img">
                 </div>
             </div>
 
             <button id="save-btn" onclick="savePlayer()">
                 <img src="img/Btns/SaveBtn.png">
+            </button>
+        </div>
+    </section>
+
+    <!-- ---------------Career Hub--------------- -->
+    <section id="career-hub">
+
+        <div id="hub-content">
+            <div id="standings-window" class="box-style">
+                <div class="panel-title">CHAMPIONSHIP STANDINGS</div>
+                <div id="wm-tabelle">
+                    <div class="drivers">
+                        <!-- Fahrer irgendwie hinzufügen über JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="hub-nav">
+                <button class="hub-btn">
+                    <img src="img/Btns/Übersicht.png">
+                </button>
+                <button class="hub-btn" onclick="raceCalendar()">
+                    <img src="img/Btns/Rennkalender-inactive.png">
+                </button>
+            </div>
+
+            <div id="info-box" class="box-style">
+                <div id="next-race-box">
+                    <div class="panel-title">NEXT RACE</div>
+                    <div class="race-details">
+                        <h3><!-- Streckennamen (gekoppelt mit Rennkalender im JS) --></h3>
+                        <p><!-- Runden und Kilometeranzahl pro Runde --></p>
+                        <img src="" class="track-map">
+                    </div>
+                </div>
+
+                <div id="player-profile">
+                    <div class="panel-title">DRIVER PROFILE</div>
+                    <p id="money">Geld:</p>
+                    <p id="player-money"><!-- Geld berechnen über JS --></p>
+                </div>
+            </div>
+        </div>
+
+        <button id="abreisen-btn" onclick="depart()">
+            <img src="img/Btns/AbreisenBtn.png" alt="Abreisen">
+        </button>
+    </section>
+
+    <!-- ---------------Race Calendar--------------- -->
+    <section id="race-calendar">
+        <div id="hub-nav">
+            <button class="hub-btn" onclick="careerHub()">
+                <img src="img/Btns/Übersicht-inactive.png">
+            </button>
+            <button class="hub-btn">
+                <img src="img/Btns/Rennkalender-active.png">
             </button>
         </div>
     </section>

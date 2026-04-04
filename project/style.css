@@ -30,7 +30,7 @@
     gap: 40px;
 }
 
-.logo {
+#logo-start {
     animation: fadeInDown 1s ease forwards;
 }
 
@@ -132,9 +132,9 @@ h1 {
     gap: 20px;
 }
 
-.char-card,
-.char-card2,
-.char-card3 {
+#char-card1,
+#char-card2,
+#char-card3 {
     cursor: pointer;
     background-image: url(img/Looks/card.png);
     background-repeat: no-repeat;
@@ -149,16 +149,109 @@ h1 {
     padding-bottom: 80px;
 }
 
-.char-card {
+#char-card1 {
     animation: fadeInRight 1s ease forwards;
 }
 
-.char-card2 {
+#char-card2 {
     animation: fadeInRight 1s 0.05s ease forwards;
 }
 
-.char-card3 {
+#char-card3 {
     animation: fadeInRight 1s 0.1s ease forwards;
+}
+
+/* ==================================================
+                     Career Hub
+================================================== */
+
+#career-hub {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: url('img/Backgrounds/CareerHub.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#hub-content {
+    display: flex;
+    width: 95%;
+    height: 60%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+    position: relative;
+}
+
+#standings-window {
+    width: 330px;
+    height: 100%;
+    margin-top: 150px;
+    animation: fadeInLeft 1s ease forwards;
+}
+
+#info-box {
+    width: 380px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 150px;
+    animation: fadeInRight 1s ease forwards;
+}
+
+.box-style {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.panel-title {
+    font-family: F1 title;
+    background: linear-gradient(90deg, #e10600, transparent);
+    padding: 6px 15px;
+    margin-bottom: 15px;
+    border-left: 4px solid white;
+    font-size: 1rem;
+    color: white;
+}
+
+.drivers {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#money {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ==================================================
+                    Race Calendar
+================================================== */
+
+#race-calendar {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: url('img/Backgrounds/CareerHub.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
 /* ==================================================
@@ -197,6 +290,11 @@ button:hover {
     bottom: 40px;
 }
 
+#abreisen-btn {
+    position: absolute;
+    bottom: 40px;
+}
+
 /* ==================================================
                         Images
 ================================================== */
@@ -216,13 +314,23 @@ button:hover {
     animation: fadeInUp 1s ease forwards;
 }
 
-.char-card img {
+.hub-btn img {
+    width: 280px;
+    animation: fadeInDown 1s ease forwards;
+}
+
+#abreisen-btn img {
+    width: 350px;
+    animation: fadeInUp 1s ease forwards;
+}
+
+#char-card1 img {
     width: 180px;
     display: block;
 }
 
-.char-card2 img,
-.char-card3 img {
+#char-card2 img,
+#char-card3 img {
     width: 170px;
     display: block;
 }
@@ -232,8 +340,12 @@ button:hover {
     animation: fadeInUp 1.2s ease forwards;
 }
 
-.logo img {
+#logo-start img {
     width: 800px;
+}
+
+.logo-hub img {
+    width: 500px;
 }
 
 /* ==================================================
