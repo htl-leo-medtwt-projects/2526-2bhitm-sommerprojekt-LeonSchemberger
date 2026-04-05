@@ -10,6 +10,12 @@ function savePlayer() {
     document.getElementById('career-hub').style.display = 'flex'
 }
 
+function depart() {
+    document.getElementById('career-hub').style.display = 'none';
+
+    document.getElementById('race-prep').style.display = 'flex';
+}
+
 function raceCalendar() {
     document.getElementById('career-hub').style.display = 'none';
 

@@ -122,7 +122,7 @@
 
     <!-- ---------------Race Calendar--------------- -->
     <section id="race-calendar">
-        <div id="hub-nav">
+        <div id="calendar-nav">
             <button class="hub-btn" onclick="careerHub()">
                 <img src="img/Btns/Übersicht-inactive.png">
             </button>
@@ -130,6 +130,133 @@
                 <img src="img/Btns/Rennkalender-active.png">
             </button>
         </div>
+
+        <div id="calendar-box" class="box-style">
+            <div class="panel-title">SEASON CALENDAR</div>
+
+            <div id="tracks-grid">
+                <div class="track-card active" id="race-1">
+                    <img src="img/Flags/Bahrain.png" class="flag-img">
+                    <div class="track-name">BAHRAIN</div>
+                    <div class="difficulty">★☆☆☆☆</div>
+                </div>
+
+                <div class="track-card" id="race-2">
+                    <img src="img/Flags/Italy.png" class="flag-img">
+                    <div class="track-name">MONZA</div>
+                    <div class="difficulty">★☆☆☆☆</div>
+                </div>
+
+                <div class="track-card" id="race-3">
+                    <img src="img/Flags/Austria.png" class="flag-img">
+                    <div class="track-name">SPIELBERG</div>
+                    <div class="difficulty">★★☆☆☆</div>
+                </div>
+
+                <div class="track-card" id="race-4">
+                    <img src="img/Flags/UK.png" class="flag-img">
+                    <div class="track-name">SILVERSTONE</div>
+                    <div class="difficulty">★★★☆☆</div>
+                </div>
+
+                <div class="track-card" id="race-5">
+                    <img src="img/Flags/Belgium.png" class="flag-img">
+                    <div class="track-name">SPA</div>
+                    <div class="difficulty">★★★☆☆</div>
+                </div>
+
+                <div class="track-card" id="race-6">
+                    <img src="img/Flags/Japan.png" class="flag-img">
+                    <div class="track-name">SUZUKA</div>
+                    <div class="difficulty">★★★★☆</div>
+                </div>
+
+                <div class="track-card" id="race-7">
+                    <img src="img/Flags/Monaco.png" class="flag-img">
+                    <div class="track-name">MONACO</div>
+                    <div class="difficulty">★★★★★</div>
+                </div>
+
+                <div class="track-card" id="race-8">
+                    <img src="img/Flags/Singapore.png" class="flag-img">
+                    <div class="track-name">SINGAPORE</div>
+                    <div class="difficulty">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------------Race Preparation--------------- -->
+    <section id="race-prep">
+        <header id="prep-header">
+            <h1 id="race-title">[COUNTRY] GRAND PRIX</h1>
+            <div id="weather-info-box">
+                <div>VORHERSAGE:</div>
+            </div>
+        </header>
+
+        <div id="strategy-grid">
+            <div class="prep-column box-style" style="animation: fadeInLeft 1s ease forwards;">
+                <div class="panel-title">RENNZIELE</div>
+                <div class="button-stack">
+                    <button class="img-selection"><img src="img/Btns/Top4.png" id="goal-1"></button>
+                    <button class="img-selection"><img src="img/Btns/Top10.png" id="goal-2"></button>
+                    <button class="img-selection"><img src="img/Btns/Beenden.png" id="goal-3"></button>
+                </div>
+            </div>
+
+            <div class="prep-column box-style" style="animation: fadeInUp 1s ease forwards;">
+                <div class="panel-title">REIFENSTRATEGIE</div>
+
+                <div class="tyre-grid">
+                    <div class="tyre-row">
+                        <div class="tyre-item">
+                            <button class="img-selection"><img src="img/Tire/SoftTire.png"></button>
+                            <span class="tyre-label">SOFT</span>
+                        </div>
+                        <div class="tyre-item">
+                            <button class="img-selection"><img src="img/Tire/MediumTire.png"></button>
+                            <span class="tyre-label">MEDIUM</span>
+                        </div>
+                        <div class="tyre-item">
+                            <button class="img-selection"><img src="img/Tire/HardTire.png"></button>
+                            <span class="tyre-label">HARD</span>
+                        </div>
+                    </div>
+
+                    <div class="tyre-row rain-locked centered-rain">
+                        <div class="tyre-item small-tyre">
+                            <button class="img-selection"><img src="img/Tire/InterTire.png"></button>
+                            <span class="tyre-label">INTER</span>
+                        </div>
+                        <div class="tyre-item small-tyre">
+                            <button class="img-selection"><img src="img/Tire/WetTire.png"></button>
+                            <span class="tyre-label">WET</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prep-column box-style" style="animation: fadeInRight 1s ease forwards;">
+                <div class="panel-title">FAHRZEUG-SETUP</div>
+                <div class="button-stack">
+                    <button class="img-selection"><img src="img/Btns/TrockenSetup.png"></button>
+                    <button class="img-selection"><img src="img/Btns/AusgewogenesSetup.png"></button>
+                    <button class="img-selection"><img src="img/Btns/WetSetup.png"></button>
+                </div>
+
+                <div class="panel-title" style="margin-top: 20px;">AGRESSIVITÄT</div>
+                <div class="horizontal-btns">
+                    <button class="img-small"><img src="img/Btns/Risiko.png"></button>
+                    <button class="img-small"><img src="img/Btns/Ausgewogen.png"></button>
+                    <button class="img-small"><img src="img/Btns/Ruhig.png"></button>
+                </div>
+            </div>
+        </div>
+
+        <button id="start-race-btn">
+            <img src="img/Btns/RaceStartBtn.png">
+        </button>
     </section>
 
 
