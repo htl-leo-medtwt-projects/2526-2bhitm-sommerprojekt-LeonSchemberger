@@ -1,6 +1,11 @@
 @font-face {
     font-family: 'F1 Title';
-    src: url(fonts/Alphacorsa\ Personal\ Use\ Italic.ttf);
+    src: url(fonts/Formula1-Bold_web_0.ttf);
+}
+
+@font-face {
+    font-family: 'F1 text';
+    src: url(fonts/Formula1-Regular_web_0.ttf);
 }
 
 * {
@@ -324,13 +329,13 @@ h1 {
     position: relative;
 }
 
-#prep-header {
+.header {
     margin-top: 30px;
     text-align: center;
     animation: fadeInUp 1s ease forwards;
 }
 
-#race-title {
+.race-title {
     font-family: F1 title;
     color: white;
     font-size: 3.5rem;
@@ -346,7 +351,6 @@ h1 {
     border-left: 4px solid white;
     font-size: 1rem;
     color: white;
-    text-align: left;
 }
 
 #strategy-grid {
@@ -363,13 +367,13 @@ h1 {
     flex-direction: column;
 }
 
-.tyre-grid {
+.tire-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.tyre-row {
+.tire-row {
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -396,13 +400,13 @@ h1 {
     pointer-events: none;
 }
 
-.tyre-item {
+.tire-item {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.tyre-label {
+.tire-label {
     font-family: F1 title;
     font-size: 0.7rem;
     color: white;
@@ -414,8 +418,61 @@ h1 {
     gap: 30px;
 }
 
-.small-tyre {
+.small-tire {
     max-width: 130px;
+}
+
+/* ==================================================
+                   Race Results
+================================================== */
+
+#race-results {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: url('img/Backgrounds/Rennergebnisse.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+#results-grid {
+    display: grid;
+    gap: 40px;
+    margin-top: 60px;
+    width: 80%;
+}
+
+.results-box {
+    padding: 40px;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+}
+
+.summary-box {
+    grid-column: span 2;
+    margin: 0 auto;
+    width: 60%;
+}
+
+.results-content {
+    font-family: F1 text;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+.divider {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 15px;
+}
+
+.highlight {
+    font-size: 1.8rem;
+    color: white;
 }
 
 /* ==================================================
@@ -464,6 +521,11 @@ button:hover {
     bottom: 50px;
 }
 
+#home-btn {
+    position: absolute;
+    bottom: 60px;
+}
+
 /* ==================================================
                         Images
 ================================================== */
@@ -495,6 +557,11 @@ button:hover {
 
 #start-race-btn img {
     width: 320px;
+    animation: fadeInUp 1s ease forwards;
+}
+
+#home-btn img {
+    width: 350px;
     animation: fadeInUp 1s ease forwards;
 }
 

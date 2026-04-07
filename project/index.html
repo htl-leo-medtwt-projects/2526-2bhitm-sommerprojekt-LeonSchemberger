@@ -65,7 +65,7 @@
                     <img src="img/Looks/Look2-old.png" class="char-img">
                 </div>
                 <div id="char-card3" onclick="setAge(23)">
-                    <img src="img/Looks/Look3-dark.png" class="char-img">
+                    <img src="img/Looks/Look3-mid.png" class="char-img">
                 </div>
             </div>
 
@@ -188,12 +188,12 @@
 
     <!-- ---------------Race Preparation--------------- -->
     <section id="race-prep">
-        <header id="prep-header">
-            <h1 id="race-title">[COUNTRY] GRAND PRIX</h1>
+        <h1 class="race-title">[COUNTRY] GRAND PRIX</h1>
+        <div class="header">
             <div id="weather-info-box">
                 <div>VORHERSAGE:</div>
             </div>
-        </header>
+        </div>
 
         <div id="strategy-grid">
             <div class="prep-column box-style" style="animation: fadeInLeft 1s ease forwards;">
@@ -208,30 +208,30 @@
             <div class="prep-column box-style" style="animation: fadeInUp 1s ease forwards;">
                 <div class="panel-title">REIFENSTRATEGIE</div>
 
-                <div class="tyre-grid">
-                    <div class="tyre-row">
-                        <div class="tyre-item">
-                            <button class="img-selection"><img src="img/Tire/SoftTire.png"></button>
-                            <span class="tyre-label">SOFT</span>
+                <div class="tire-grid">
+                    <div class="tire-row">
+                        <div class="tire-item">
+                            <button class="img-selection"><img src="img/Tires/SoftTire.png"></button>
+                            <span class="tire-label">SOFT</span>
                         </div>
-                        <div class="tyre-item">
-                            <button class="img-selection"><img src="img/Tire/MediumTire.png"></button>
-                            <span class="tyre-label">MEDIUM</span>
+                        <div class="tire-item">
+                            <button class="img-selection"><img src="img/Tires/MediumTire.png"></button>
+                            <span class="tire-label">MEDIUM</span>
                         </div>
-                        <div class="tyre-item">
-                            <button class="img-selection"><img src="img/Tire/HardTire.png"></button>
-                            <span class="tyre-label">HARD</span>
+                        <div class="tire-item">
+                            <button class="img-selection"><img src="img/Tires/HardTire.png"></button>
+                            <span class="tire-label">HARD</span>
                         </div>
                     </div>
 
-                    <div class="tyre-row rain-locked centered-rain">
-                        <div class="tyre-item small-tyre">
-                            <button class="img-selection"><img src="img/Tire/InterTire.png"></button>
-                            <span class="tyre-label">INTER</span>
+                    <div class="tire-row rain-locked centered-rain">
+                        <div class="tire-item small-tire">
+                            <button class="img-selection"><img src="img/Tires/InterTire.png"></button>
+                            <span class="tire-label">INTER</span>
                         </div>
-                        <div class="tyre-item small-tyre">
-                            <button class="img-selection"><img src="img/Tire/WetTire.png"></button>
-                            <span class="tyre-label">WET</span>
+                        <div class="tire-item small-tire">
+                            <button class="img-selection"><img src="img/Tires/WetTire.png"></button>
+                            <span class="tire-label">WET</span>
                         </div>
                     </div>
                 </div>
@@ -254,9 +254,45 @@
             </div>
         </div>
 
-        <button id="start-race-btn">
+        <button id="start-race-btn" onclick="startRace()">
             <img src="img/Btns/RaceStartBtn.png">
         </button>
+    </section>
+
+    <!-- ---------------Race Results--------------- -->
+    <section id="race-results">
+        <h1 class="race-title">GRAND PRIX RENNERGEBNISSE</h1>
+
+        <div id="results-grid">
+            <div class="results-box box-style" style="animation: fadeInLeft 1s ease forwards;">
+                <div class="results-content">
+                    <p>Position: __</p>
+                    <p>+ __ Points</p>
+                    <hr class="divider">
+                    <p class="highlight">WM TABELLEN PLATZ: __</p>
+                </div>
+            </div>
+
+            <div class="results-box box-style" style="animation: fadeInRight 1s ease forwards;">
+                <div class="results-content">
+                    <p>Ziel Geld: + __ €</p>
+                    <hr class="divider">
+                    <p class="highlight">KONTOSTAND: __ €</p>
+                </div>
+            </div>
+
+            <div class="results-box summary-box box-style" style="animation: fadeInUp 1s ease forwards;">
+                <div class="results-content">
+                    <h3>RENNZUSAMMENFASSUNG</h3>
+                    <p>Das Rennen wurde erfolgreich beendet.</p>
+                </div>
+            </div>
+        </div>
+
+        <button id="home-btn" onclick="backHome()">
+            <img src="img/Btns/NachHause.png">
+        </button>
+    </section>
     </section>
 
 
