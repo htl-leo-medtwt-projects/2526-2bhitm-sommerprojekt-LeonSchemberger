@@ -1,4 +1,4 @@
-[
+const driversData = [
     {
         "id": 1,
         "name": "Max Verstappen",

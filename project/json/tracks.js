@@ -1,7 +1,7 @@
-[
+const tracksData = [
   {
     "id": "bahrain",
-    "name": "BAHRAIN",
+    "name": "Bahrain International Circuit",
     "country": "Bahrain",
     "city": "Sakhir",
     "rain_chance": 0.05,
@@ -12,7 +12,7 @@
   },
   {
     "id": "monza",
-    "name": "MONZA",
+    "name": "Autodromo Nazionale Monza",
     "country": "Italien",
     "city": "Monza",
     "rain_chance": 0.15,
@@ -23,7 +23,7 @@
   },
   {
     "id": "spielberg",
-    "name": "SPIELBERG",
+    "name": "Red Bull Ring",
     "country": "Österreich",
     "city": "Spielberg",
     "rain_chance": 0.5,
@@ -34,7 +34,7 @@
   },
   {
     "id": "silverstone",
-    "name": "SILVERSTONE",
+    "name": "Silverstone Circuit",
     "country": "Großbritannien",
     "city": "Silverstone",
     "rain_chance": 0.55,
@@ -45,7 +45,7 @@
   },
   {
     "id": "spa",
-    "name": "SPA",
+    "name": "Circuit de Spa-Francorchamps",
     "country": "Belgien",
     "city": "Stavelot",
     "rain_chance": 1.0,
@@ -56,7 +56,7 @@
   },
   {
     "id": "suzuka",
-    "name": "SUZUKA",
+    "name": "Suzuka Circuit",
     "country": "Japan",
     "city": "Suzuka",
     "rain_chance": 0.35,
@@ -67,7 +67,7 @@
   },
   {
     "id": "monaco",
-    "name": "MONACO",
+    "name": "Circuit de Monaco",
     "country": "Monaco",
     "city": "Monte Carlo",
     "rain_chance": 0.20,
@@ -78,7 +78,7 @@
   },
   {
     "id": "singapore",
-    "name": "SINGAPORE",
+    "name": "Marina Bay Street Circuit",
     "country": "Singapur",
     "city": "Marina Bay",
     "rain_chance": 0.40,

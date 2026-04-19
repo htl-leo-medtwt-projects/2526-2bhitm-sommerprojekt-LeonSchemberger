@@ -7,6 +7,9 @@
     <title>Racing Dreams</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+
+    <script src="json/tracks.js" defer></script>
+    <script src="json/drivers.js" defer></script>
 </head>
 
 <body>
@@ -42,18 +45,18 @@
                 <select id="team-select">
                     <option value="" disabled selected>Team wählen...</option>
 
-                    <option value="haas">Haas F1 Team (Kostenlos)</option>
-                    <option value="sauber">Audi (Kostenlos)</option>
-                    <option value="williams">Williams (Kostenlos)</option>
+                    <option value="Haas">Haas F1 Team (Kostenlos)</option>
+                    <option value="Audi">Audi (Kostenlos)</option>
+                    <option value="Williams">Williams (Kostenlos)</option>
 
-                    <option value="cadillac" disabled>Cadillac - 250.000 €</option>
-                    <option value="alpine" disabled>Alpine - 500.000 €</option>
-                    <option value="rb" disabled>Racing Bulls - 750.000 €</option>
-                    <option value="aston" disabled>Aston Martin - 1.200.000 €</option>
-                    <option value="mercedes" disabled>Mercedes - 2.500.000 €</option>
-                    <option value="mclaren" disabled>McLaren - 3.000.000 €</option>
-                    <option value="ferrari" disabled>Ferrari - 4.500.000 €</option>
-                    <option value="redbull" disabled>Red Bull Racing - 6.000.000 €</option>
+                    <option value="Cadillac" disabled>Cadillac - 250.000 €</option>
+                    <option value="Alpine" disabled>Alpine - 500.000 €</option>
+                    <option value="Racing Bulls" disabled>Racing Bulls - 750.000 €</option>
+                    <option value="Aston Martin" disabled>Aston Martin - 1.200.000 €</option>
+                    <option value="Mercedes" disabled>Mercedes - 2.500.000 €</option>
+                    <option value="McLaren" disabled>McLaren - 3.000.000 €</option>
+                    <option value="Ferrari" disabled>Ferrari - 4.500.000 €</option>
+                    <option value="Red Bull Racing" disabled>Red Bull Racing - 6.000.000 €</option>
                 </select>
             </div>
 
@@ -82,9 +85,7 @@
             <div id="standings-window" class="box-style">
                 <div class="panel-title">CHAMPIONSHIP STANDINGS</div>
                 <div id="wm-tabelle">
-                    <div class="drivers">
-                        <!-- Fahrer irgendwie hinzufügen über JS -->
-                    </div>
+                    <div class="drivers"></div>
                 </div>
             </div>
 
@@ -102,7 +103,8 @@
                     <div class="panel-title">NEXT RACE</div>
                     <div class="race-details">
                         <h3></h3>
-                        <p></p>
+                        <p id="track-country"></p>
+                        <p id="track-city"></p>
                         <img src="" class="track-map">
                     </div>
                 </div>

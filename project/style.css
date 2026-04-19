@@ -57,6 +57,7 @@
 }
 
 #rules-panel {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,8 +66,48 @@
 
 #rules-panel img {
     width: 80%;
+    display: block;
 }
 
+.rules-content {
+    position: absolute;
+    top: 53%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72%; 
+    height: 80%;
+    overflow-y: auto;
+    padding: 20px 30px;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+.rules-content::-webkit-scrollbar {
+    width: 6px;
+}
+.rules-content::-webkit-scrollbar-thumb {
+    background: #e10600;
+    border-radius: 10px;
+}
+.rules-content::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+}
+
+.rules-content h2 {
+    margin-top: 0;
+    color: #e10600;
+    text-align: center;
+    font-family: F1 Title;
+}
+
+.rules-content h3 {
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.rules-content ul, li {
+    font-family: F1 text;
+}
 /* ==================================================
                     Create Charakter
 ================================================== */
@@ -206,7 +247,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin-top: 150px;
+    margin-top: 20px;
     animation: fadeInRight 1s ease forwards;
 }
 
@@ -229,18 +270,80 @@ h1 {
     color: white;
 }
 
+#wm-tabelle {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+
 .drivers {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.driver-row {
+    display: flex;
     justify-content: space-between;
-    padding: 10px 0;
+    align-items: center;
+    padding: 12px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#money {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.2rem;
+.pos {
+    width: 30px;
     font-weight: bold;
+    color: #e10600;
+    font-family: F1 Title;
+}
+
+.name {
+    flex-grow: 1;
+    margin-left: 10px;
+    font-family: F1 text;
+}
+
+.pts {
+    width: 60px;
+    text-align: right;
+    font-weight: bold;
+    font-family: F1 Title;
+}
+
+#wm-tabelle::-webkit-scrollbar {
+    width: 5px;
+}
+
+#wm-tabelle::-webkit-scrollbar-thumb {
+    background: #e10600;
+    border-radius: 10px;
+}
+
+#player-profile {
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: F1 text;
+}
+
+.race-details {
+    text-align: center;
+}
+
+h3 {
+    font-family: F1 Title;
+}
+
+p {
+    font-family: F1 text;
+}
+
+.track-map {
+    height: 150px;
+    width: auto;
+    filter: invert(1);
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 /* ==================================================

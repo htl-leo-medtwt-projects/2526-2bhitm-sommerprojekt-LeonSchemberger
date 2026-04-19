@@ -47,6 +47,33 @@ function setAge(age) {
     document.getElementById("player-age").value = age;
 }
 
+function wmStanding() {
+    const container = document.querySelector('.drivers');
+
+    let table = "";
+
+    table += `
+    <div class="driver-row">
+        <span class="pos">1</span>
+        <span class="name">${player.name} (DU)</span>
+        <span class="pts">0 PTS</span>
+    </div>`;
+
+    for (let i = 0; i < driversData.length; i++) {
+        const driver = driversData[i];
+
+        table += `
+            <div class="driver-row">
+                <span class="pos">${i + 2}</span>
+                <span class="name">${driver.name}</span>
+                <span class="pts">0 PTS</span>
+            </div>
+        `;
+    }
+
+    container.innerHTML = table;
+}
+
 function updateHub() {
     document.getElementById("hub-player-name").innerHTML = "Name: " + player.name;
     document.getElementById("player-team").innerHTML = "Team: " + player.team;
@@ -59,14 +86,13 @@ function updateHub() {
     const charDiv = document.getElementById("charakter");
     charDiv.innerHTML = `<img src ="${player.look}" style="width: 180px; margin-top: 20px">`;
 
-    if (tracks.length > 0) {
-        const nextRace = track[0];
-        const raceBox = document.querySelector("#next-race-box .race-details");
+    const nextRace = tracksData[0];
+    const raceBox = document.querySelector("#next-race-box .race-details");
 
-        raceBox.querySelector('h3').innerHTML = nextRace.name;
-        raceBox.querySelector('p').innerHTML = nextRace.city + " (" + nextRace.country + ")";
-        raceBox.querySelector('.track-map').src = nextRace.track_image;
-    }
+    raceBox.querySelector('h3').innerHTML = nextRace.name;
+    document.getElementById('track-country').innerHTML = "Land: " + nextRace.country;
+    document.getElementById('track-city').innerHTML = "Stadt: " + nextRace.city
+    raceBox.querySelector('.track-map').src = nextRace.track_image;
 }
 
 function savePlayer() {
@@ -82,4 +108,5 @@ function savePlayer() {
     document.getElementById('career-hub').style.display = 'flex'
 
     updateHub();
+    wmStanding();
 }
