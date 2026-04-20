@@ -734,13 +734,11 @@ button:hover {
 @keyframes fadeInLeft {
     0% {
         transform: translateX(-200px);
-        /* Startet links außerhalb */
         opacity: 0;
     }
 
     100% {
         transform: translateX(0);
-        /* Endet an der Originalposition */
         opacity: 1;
     }
 }
@@ -748,7 +746,6 @@ button:hover {
 @keyframes fadeInRight {
     0% {
         transform: translateX(200px);
-        /* Startet rechts außerhalb */
         opacity: 0;
     }
 
