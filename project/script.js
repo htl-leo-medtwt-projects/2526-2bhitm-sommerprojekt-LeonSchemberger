@@ -14,18 +14,14 @@ function depart() {
     document.getElementById('career-hub').style.display = 'none';
 
     document.getElementById('race-prep').style.display = 'flex';
+
+    generateWeather(0);
 }
 
 function careerHub() {
     document.getElementById('race-calendar').style.display = 'none';
 
     document.getElementById('career-hub').style.display = 'flex'
-}
-
-function startRace() {
-    document.getElementById('race-prep').style.display = 'none';
-
-    document.getElementById('race-results').style.display = 'flex';
 }
 
 function backHome() {
@@ -95,6 +91,24 @@ function updateHub() {
     raceBox.querySelector('.track-map').src = nextRace.track_image;
 }
 
+//Um den schlechteren Fahrer des beigetreten Teams zu ersetzten wurde Gemini gefragt
+function replaceWorstDriver(selectedTeamName) {
+    let teamDrivers = driversData.filter(d => d.team === selectedTeamName);
+
+    if (teamDrivers.length > 0) {
+
+        teamDrivers.sort((a, b) => a.skill - b.skill);
+
+        let worstDriver = teamDrivers[0];
+
+        const index = driversData.indexOf(worstDriver);
+        if (index !== -1) {
+            driversData.splice(index, 1);
+            console.log(`${worstDriver.name} wurde entlassen, um Platz für ${player.name} zu machen.`);
+        }
+    }
+}
+
 function savePlayer() {
     player.name = document.getElementById("player-name").value;
     player.team = document.getElementById("team-select").value;
@@ -104,9 +118,62 @@ function savePlayer() {
         return;
     }
 
+    replaceWorstDriver(player.team);
+
     document.getElementById('char-creator').style.display = 'none';
     document.getElementById('career-hub').style.display = 'flex'
 
     updateHub();
     wmStanding();
+}
+
+let selectedStrategy = {
+    goal: 1,
+    tire: "MEDIUM",
+    setup: "balanced",
+    aggression: "balanced",
+    isRainRace: false
+};
+
+function generateWeather(trackIndex) {
+    const weatherBox = document.getElementById("weather-info-box");
+    const rainRow = document.querySelector(".rain-locked");
+
+    const currentTrack = tracksData[trackIndex];
+
+    const random = Math.random();
+
+    if (random < currentTrack.rain_chance) {
+        selectedStrategy.isRainRace = true;
+        weatherBox.innerHTML = "<div>VORHERSAGE - REGEN</div>";
+        rainRow.style.opacity = "1";
+        rainRow.style.pointerEvents = "auto";
+        rainRow.style.filter = "none";
+    } else {
+        selectedStrategy.isRainRace = false;
+        weatherBox.innerHTML = "<div>VORHERSAGE - SONNIG</div>";
+        rainRow.style.opacity = "0.3";
+        rainRow.style.pointerEvents = "none";
+    }
+}
+
+function selectTire(tireType) {
+    selectedStrategy.tire = tireType;
+    console.log("Reifen gewählt: " + tireType);
+}
+
+function selectSetup(setupType) {
+    selectedStrategy.setup = setupType;
+    console.log("Setup gewählt: " + setupType)
+}
+
+function selectAggression(aggressionType) {
+    selectedStrategy.aggression = aggressionType;
+    console.log("Aggression gewählt: " + aggressionType)
+}
+
+function startRace() {
+    document.getElementById('race-prep').style.display = 'none';
+
+    document.getElementById('race-results').style.display = 'flex';
 }

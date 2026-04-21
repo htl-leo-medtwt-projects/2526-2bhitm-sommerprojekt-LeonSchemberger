@@ -1,4 +1,4 @@
-[
+const teamsData = [
   {
     "id": "haas",
     "name": "Haas F1 Team",

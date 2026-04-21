@@ -10,6 +10,7 @@
 
     <script src="json/tracks.js" defer></script>
     <script src="json/drivers.js" defer></script>
+    <script src="json/teams.js" defer></script>
 </head>
 
 <body>
@@ -111,7 +112,7 @@
 
                 <div id="player-profile">
                     <div class="panel-title">DRIVER PROFILE</div>
-                    <p id="player-money">Geld:</p> <!--Geld berechnen (Local Storage Spint #4)-->
+                    <p id="player-money">Geld:</p> <!--Geld berechnen (Local Storage Sprint #4)-->
                     <p id="hub-player-name"></p>
                     <p id="player-team"></p>
                     <p id="charakter"></p>
@@ -196,7 +197,6 @@
         <h1 class="race-title">[COUNTRY] GRAND PRIX</h1>
         <div class="header">
             <div id="weather-info-box">
-                <div>VORHERSAGE:</div>
             </div>
         </div>
 
@@ -216,26 +216,36 @@
                 <div class="tire-grid">
                     <div class="tire-row">
                         <div class="tire-item">
-                            <button class="img-selection"><img src="img/Tires/SoftTire.png"></button>
+                            <button class="img-selection" onclick="selectTire('SOFT')">
+                                <img src="img/Tires/SoftTire.png">
+                            </button>
                             <span class="tire-label">SOFT</span>
                         </div>
                         <div class="tire-item">
-                            <button class="img-selection"><img src="img/Tires/MediumTire.png"></button>
+                            <button class="img-selection" onclick="selectTire('MEDIUM')">
+                                <img src="img/Tires/MediumTire.png">
+                            </button>
                             <span class="tire-label">MEDIUM</span>
                         </div>
                         <div class="tire-item">
-                            <button class="img-selection"><img src="img/Tires/HardTire.png"></button>
+                            <button class="img-selection" onclick="selectTire('HARD')">
+                                <img src="img/Tires/HardTire.png">
+                            </button>
                             <span class="tire-label">HARD</span>
                         </div>
                     </div>
 
                     <div class="tire-row rain-locked centered-rain">
                         <div class="tire-item small-tire">
-                            <button class="img-selection"><img src="img/Tires/InterTire.png"></button>
+                            <button class="img-selection">
+                                <img src="img/Tires/InterTire.png">
+                            </button>
                             <span class="tire-label">INTER</span>
                         </div>
                         <div class="tire-item small-tire">
-                            <button class="img-selection"><img src="img/Tires/WetTire.png"></button>
+                            <button class="img-selection">
+                                <img src="img/Tires/WetTire.png">
+                            </button>
                             <span class="tire-label">WET</span>
                         </div>
                     </div>
@@ -245,16 +255,27 @@
             <div class="prep-column box-style" style="animation: fadeInRight 1s ease forwards;">
                 <div class="panel-title">FAHRZEUG-SETUP</div>
                 <div class="button-stack">
-                    <button class="img-selection"><img src="img/Btns/TrockenSetup.png"></button>
-                    <button class="img-selection"><img src="img/Btns/AusgewogenesSetup.png"></button>
-                    <button class="img-selection"><img src="img/Btns/WetSetup.png"></button>
+                    <button class="img-selection" onclick="selectSetup('dry')">
+                        <img src="img/Btns/TrockenSetup.png">
+                    </button>
+                    <button class="img-selection" onclick="selectSetup('balanced')">
+                        <img src="img/Btns/AusgewogenesSetup.png">
+                    </button>
+                    <button class="img-selection" onclick="selectSetup('wet')">
+                        <img src="img/Btns/WetSetup.png">
+                    </button>
                 </div>
 
                 <div class="panel-title" style="margin-top: 20px;">AGRESSIVITÄT</div>
                 <div class="horizontal-btns">
-                    <button class="img-small"><img src="img/Btns/Risiko.png"></button>
-                    <button class="img-small"><img src="img/Btns/Ausgewogen.png"></button>
-                    <button class="img-small"><img src="img/Btns/Ruhig.png"></button>
+                    <button class="img-small" onclick="selectAggression('risiko')"><img src="img/Btns/Risiko.png">
+                    </button>
+                    <button class="img-small" onclick="selectAggression('ausgewogen')"><img
+                            src="img/Btns/Ausgewogen.png">
+                    </button>
+                    <button class="img-small" onclick="selectAggression('calm')">
+                        <img src="img/Btns/Ruhig.png">
+                    </button>
                 </div>
             </div>
         </div>
@@ -297,7 +318,6 @@
         <button id="home-btn" onclick="backHome()">
             <img src="img/Btns/NachHause.png">
         </button>
-    </section>
     </section>
 
 
