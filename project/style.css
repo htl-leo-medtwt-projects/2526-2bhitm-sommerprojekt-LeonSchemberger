@@ -71,10 +71,10 @@
 
 .rules-content {
     position: absolute;
-    top: 53%; 
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 72%; 
+    width: 72%;
     height: 80%;
     overflow-y: auto;
     padding: 20px 30px;
@@ -85,12 +85,14 @@
 .rules-content::-webkit-scrollbar {
     width: 6px;
 }
+
 .rules-content::-webkit-scrollbar-thumb {
     background: #e10600;
     border-radius: 10px;
 }
+
 .rules-content::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .rules-content h2 {
@@ -105,9 +107,11 @@
     font-size: 1.1rem;
 }
 
-.rules-content ul, li {
+.rules-content ul,
+li {
     font-family: F1 text;
 }
+
 /* ==================================================
                     Create Charakter
 ================================================== */
@@ -205,6 +209,15 @@ h1 {
 
 #char-card3 {
     animation: fadeInRight 1s 0.1s ease forwards;
+}
+
+#error {
+    font-family: F1 text;
+    color: #e10600;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    font-size: larger;
 }
 
 /* ==================================================
@@ -553,6 +566,10 @@ p {
     min-height: 180px;
     display: flex;
     align-items: center;
+}
+
+.results-box h3 {
+    text-align: center;
 }
 
 .summary-box {

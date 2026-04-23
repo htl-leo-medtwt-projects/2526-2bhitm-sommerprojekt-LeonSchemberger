@@ -112,11 +112,14 @@ function replaceWorstDriver(selectedTeamName) {
 function savePlayer() {
     player.name = document.getElementById("player-name").value;
     player.team = document.getElementById("team-select").value;
+    const error = document.getElementById('error');
 
     if (player.name === "" || player.age == 0 || player.team === "") {
-        alert("Bitte füllen Sie alles aus!");
+        error.innerHTML = "<div>Bitte füllen Sie alles aus!</div>";
         return;
     }
+
+    error.innerHTML = "";
 
     replaceWorstDriver(player.team);
 
