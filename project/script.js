@@ -175,6 +175,67 @@ function selectAggression(aggressionType) {
     console.log("Aggression gewählt: " + aggressionType)
 }
 
+function calculateRacePerformance(driver, myPlayer, track) {
+    let team = teamsData.find(t => t.name === driver.team);
+    let carPower = team ? team.car_performance : 70;
+
+    let score = 0;
+    if (track.difficulty >= 4) {
+        score = (driver.skill * 0.5) + (carPower * 0.5);
+    } else {
+        score = (driver.skill * 0.4) + (carPower * 0.6);
+    }
+
+    let dnfChance = 0.02 + (track.difficulty * 0.01);
+
+    if (myPlayer === true) {
+        if (selectedStrategy.isRainRace === true) {
+            if (selectedStrategy.tire === 'WET') score = score + 15;
+            else if (selectedStrategy.tire === 'INTER') score = score + 8;
+            else if (selectedStrategy.tire === 'SOFT') score = score - 35;
+            else if (selectedStrategy.tire === 'MEDIUM') score = score - 40;
+            else if (selectedStrategy.tire === 'HARD') score = score - 50;
+        } else {
+            if (selectedStrategy.tire === 'SOFT') score = score + 10;
+            else if (selectedStrategy.tire === 'MEDIUM') score = score + 5;
+            else if (selectedStrategy.tire === 'HARD') score = score + 2;
+            else if (selectedStrategy.tire === 'INTER') score = score - 20;
+            else if (selectedStrategy.tire === 'WET') score = score - 35;
+        }
+
+        if (selectedStrategy.isRainRace === true) {
+            if (selectedStrategy.setup === 'wet') score = score + 10;
+            else if (selectedStrategy.setup === 'balanced') score = score + 4;
+            else if (selectedStrategy.setup === 'dry') score = score - 15;
+        } else {
+            if (selectedStrategy.setup === 'dry') score = score + 10;
+            else if (selectedStrategy.setup === 'balanced') score = score + 4;
+            else if (selectedStrategy.setup === 'wet') score = score - 15;
+        }
+
+        if (selectedStrategy.aggression === 'risiko') {
+            dnfChance = dnfChance + 0.10;
+        } 
+        else if (selectedStrategy.aggression === 'ausgewogen') {
+            score = score + 5;
+        } 
+        else if (selectedStrategy.aggression === 'calm') {
+            score = score + 2;
+            dnfChance = dnfChance - 0.01;
+        }
+
+    } else {
+        let randomFactor = (Math.random() * 10) - 5;
+        score = score + randomFactor;
+    }
+
+    if (Math.random() < dnfChance) {
+        return -1;
+    }
+
+    return score;
+}
+
 function startRace() {
     document.getElementById('race-prep').style.display = 'none';
 
