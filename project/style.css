@@ -432,6 +432,33 @@ p {
                    Race Preperation
 ================================================== */
 
+.swiper {
+    width: 1100px;
+    height: 500px;
+    padding: 20px 0 50px 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#race-prep .swiper-button-next, 
+#race-prep .swiper-button-prev {
+    color: #e10600;
+}
+
+#race-prep .swiper-pagination-bullet {
+    background: #ffffff;
+    opacity: 0.5;
+}
+
+#race-prep .swiper-pagination-bullet-active {
+    background: #e10600;
+    opacity: 1;
+}
+
 #race-prep {
     display: none;
     height: 100vh;
@@ -497,8 +524,17 @@ p {
 
 .button-stack {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.img-selection {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.2s;
 }
 
 .horizontal-btns {
@@ -720,6 +756,15 @@ button:hover {
     margin-bottom: 10px;
 }
 
+#goal-1, #goal-2 {
+    width: 400px;
+    height: auto;
+}
+
+#goal-3 {
+    width: 50%;
+    height: auto;
+}
 /* ==================================================
                      Animationen
 ================================================== */

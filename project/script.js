@@ -215,10 +215,10 @@ function calculateRacePerformance(driver, myPlayer, track) {
 
         if (selectedStrategy.aggression === 'risiko') {
             dnfChance = dnfChance + 0.10;
-        } 
+        }
         else if (selectedStrategy.aggression === 'ausgewogen') {
             score = score + 5;
-        } 
+        }
         else if (selectedStrategy.aggression === 'calm') {
             score = score + 2;
             dnfChance = dnfChance - 0.01;
@@ -237,7 +237,23 @@ function calculateRacePerformance(driver, myPlayer, track) {
 }
 
 function startRace() {
-    document.getElementById('race-prep').style.display = 'none';
 
+
+    document.getElementById('race-prep').style.display = 'none';
     document.getElementById('race-results').style.display = 'flex';
 }
+
+const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,
+    spaceBetween: 50,
+    centeredSlides: true,
+
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
