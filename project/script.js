@@ -243,17 +243,22 @@ function startRace() {
     document.getElementById('race-results').style.display = 'flex';
 }
 
-const swiper = new Swiper('.mySwiper', {
-    slidesPerView: 1,
-    spaceBetween: 50,
-    centeredSlides: true,
+const swiper = new Swiper('.swiper', {
 
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides: true,
+    
+    effect: 'slide', 
+
+    resistanceRatio: 0,
+    
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
     },
 });

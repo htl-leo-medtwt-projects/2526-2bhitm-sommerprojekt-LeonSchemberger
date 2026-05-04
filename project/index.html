@@ -203,7 +203,7 @@
             <div id="weather-info-box"></div>
         </div>
 
-        <div class="swiper mySwiper">
+        <div class="swiper">
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide prep-column box-style">
@@ -258,18 +258,20 @@
 
                 <div class="swiper-slide prep-column box-style">
                     <div class="panel-title">FAHRZEUG-SETUP</div>
-                    <div class="button-stack">
+                    <div class="button-stack setup">
                         <button class="img-selection" onclick="selectSetup('dry')">
-                            <img src="img/Btns/TrockenSetup.png">
+                            <img src="img/Btns/TrockenSetup.png" id="dry-setup">
                         </button>
                         <button class="img-selection" onclick="selectSetup('balanced')">
-                            <img src="img/Btns/AusgewogenesSetup.png">
+                            <img src="img/Btns/AusgewogenesSetup.png" id="balanced-setup">
                         </button>
                         <button class="img-selection" onclick="selectSetup('wet')">
-                            <img src="img/Btns/WetSetup.png">
+                            <img src="img/Btns/WetSetup.png" id="wet-setup">
                         </button>
                     </div>
+                </div>
 
+                <div class="swiper-slide prep-column box-style">
                     <div class="panel-title" style="margin-top: 20px;">AGRESSIVITÄT</div>
                     <div class="horizontal-btns">
                         <button class="img-small" onclick="selectAggression('risiko')">
@@ -283,7 +285,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
 
             <div class="swiper-pagination"></div>
@@ -301,7 +302,7 @@
         <h1 class="race-title">GRAND PRIX RENNERGEBNISSE</h1>
 
         <div id="results-grid">
-            <div class="results-box box-style" style="animation: fadeInLeft 1s ease forwards;">
+            <div class="results-box box-style-result" style="animation: fadeInLeft 1s ease forwards;">
                 <div class="results-content">
                     <p>Position: __</p>
                     <p>+ __ Points</p>
@@ -310,7 +311,7 @@
                 </div>
             </div>
 
-            <div class="results-box box-style" style="animation: fadeInRight 1s ease forwards;">
+            <div class="results-box box-style-result" style="animation: fadeInRight 1s ease forwards;">
                 <div class="results-content">
                     <p>Ziel Geld: + __ €</p>
                     <hr class="divider">
@@ -318,7 +319,7 @@
                 </div>
             </div>
 
-            <div class="results-box summary-box box-style" style="animation: fadeInUp 1s ease forwards;">
+            <div class="results-box summary-box box-style-result" style="animation: fadeInUp 1s ease forwards;">
                 <div class="results-content">
                     <h3>RENNZUSAMMENFASSUNG</h3>
                     <p>Das Rennen wurde erfolgreich beendet.</p>

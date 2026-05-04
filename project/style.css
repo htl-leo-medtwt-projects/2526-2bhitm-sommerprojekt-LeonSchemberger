@@ -265,12 +265,16 @@ h1 {
 }
 
 .box-style {
+    width: 900px;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
     border-radius: 10px;
     padding: 20px;
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 .panel-title {
@@ -433,18 +437,22 @@ p {
 ================================================== */
 
 .swiper {
-    width: 1100px;
+    width: 1000px;
     height: 500px;
-    padding: 20px 0 50px 0;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
 }
 
 .swiper-slide {
+    width: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#race-prep .swiper-button-next, 
+#race-prep .swiper-button-next,
 #race-prep .swiper-button-prev {
     color: #e10600;
 }
@@ -513,13 +521,16 @@ p {
 .tire-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+    margin-top: 60px;
+    align-items: center;
 }
 
 .tire-row {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: space-around;
+    width: 100%;
+    gap: 15px;
 }
 
 .button-stack {
@@ -528,7 +539,7 @@ p {
     justify-content: center;
     gap: 15px;
     width: 100%;
-    margin-top: 60px;
+    margin-top: 70px;
 }
 
 .img-selection {
@@ -539,12 +550,11 @@ p {
 
 .horizontal-btns {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.img-small img {
-    width: 100px;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 80px;
 }
 
 .rain-locked {
@@ -556,6 +566,13 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+}
+
+.tire-item .img-selection {
+    width: 150px;
+    height: auto;
+    transition: transform 0.2s ease;
 }
 
 .tire-label {
@@ -602,6 +619,15 @@ p {
     min-height: 180px;
     display: flex;
     align-items: center;
+}
+
+.box-style-result {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .results-box h3 {
@@ -756,7 +782,8 @@ button:hover {
     margin-bottom: 10px;
 }
 
-#goal-1, #goal-2 {
+#goal-1,
+#goal-2 {
     width: 400px;
     height: auto;
 }
@@ -765,6 +792,27 @@ button:hover {
     width: 50%;
     height: auto;
 }
+
+#dry-setup,
+#balanced-setup,
+#wet-setup {
+    width: 60%;
+    height: auto;
+}
+
+.setup {
+    margin-top: 50px;
+}
+
+.tire-item .img-selection img {
+    width: 120px;
+    height: auto;
+}
+
+.img-small img {
+    width: 230px;
+}
+
 /* ==================================================
                      Animationen
 ================================================== */
