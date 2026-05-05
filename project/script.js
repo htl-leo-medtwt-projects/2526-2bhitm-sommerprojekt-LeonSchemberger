@@ -131,10 +131,10 @@ function savePlayer() {
 }
 
 let selectedStrategy = {
-    goal: 1,
-    tire: "MEDIUM",
-    setup: "balanced",
-    aggression: "balanced",
+    goal: 0,
+    tire: "",
+    setup: "",
+    aggression: "",
     isRainRace: false
 };
 
@@ -162,17 +162,14 @@ function generateWeather(trackIndex) {
 
 function selectTire(tireType) {
     selectedStrategy.tire = tireType;
-    console.log("Reifen gewählt: " + tireType);
 }
 
 function selectSetup(setupType) {
     selectedStrategy.setup = setupType;
-    console.log("Setup gewählt: " + setupType)
 }
 
 function selectAggression(aggressionType) {
     selectedStrategy.aggression = aggressionType;
-    console.log("Aggression gewählt: " + aggressionType)
 }
 
 function calculateRacePerformance(driver, myPlayer, track) {
@@ -180,15 +177,11 @@ function calculateRacePerformance(driver, myPlayer, track) {
     let carPower = team ? team.car_performance : 70;
 
     let score = 0;
-    if (track.difficulty >= 4) {
-        score = (driver.skill * 0.5) + (carPower * 0.5);
-    } else {
-        score = (driver.skill * 0.4) + (carPower * 0.6);
-    }
-
     let dnfChance = 0.02 + (track.difficulty * 0.01);
 
     if (myPlayer === true) {
+        score = carPower;
+
         if (selectedStrategy.isRainRace === true) {
             if (selectedStrategy.tire === 'WET') score = score + 15;
             else if (selectedStrategy.tire === 'INTER') score = score + 8;
@@ -199,8 +192,6 @@ function calculateRacePerformance(driver, myPlayer, track) {
             if (selectedStrategy.tire === 'SOFT') score = score + 10;
             else if (selectedStrategy.tire === 'MEDIUM') score = score + 5;
             else if (selectedStrategy.tire === 'HARD') score = score + 2;
-            else if (selectedStrategy.tire === 'INTER') score = score - 20;
-            else if (selectedStrategy.tire === 'WET') score = score - 35;
         }
 
         if (selectedStrategy.isRainRace === true) {
@@ -214,6 +205,7 @@ function calculateRacePerformance(driver, myPlayer, track) {
         }
 
         if (selectedStrategy.aggression === 'risiko') {
+            score = score + 5;
             dnfChance = dnfChance + 0.10;
         }
         else if (selectedStrategy.aggression === 'ausgewogen') {
@@ -225,6 +217,12 @@ function calculateRacePerformance(driver, myPlayer, track) {
         }
 
     } else {
+        if (track.difficulty >= 4) {
+            score = (driver.skill * 0.5) + (carPower * 0.5);
+        } else {
+            score = (driver.skill * 0.3) + (carPower * 0.7);
+        }
+
         let randomFactor = (Math.random() * 10) - 5;
         score = score + randomFactor;
     }
@@ -237,41 +235,42 @@ function calculateRacePerformance(driver, myPlayer, track) {
 }
 
 function startRace() {
-
+    if (selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
+        return;
+    }
 
     document.getElementById('race-prep').style.display = 'none';
     document.getElementById('race-results').style.display = 'flex';
 }
 
-const swiper = new Swiper('.swiper', {
+    const swiper = new Swiper('.swiper', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        centeredSlides: true,
 
-    slidesPerView: 1,
-    spaceBetween: 0,
-    centeredSlides: true,
-    
-    effect: 'slide', 
+        effect: 'slide',
 
-    resistanceRatio: 0,
-    
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-});
+        resistanceRatio: 0,
 
-//Für die hervorhebung der Auswahl wurde Gemini gefragt
-document.querySelectorAll('.box-style button').forEach(button => {
-    button.addEventListener('click', function() {
-        const currentSlide = this.closest('.swiper-slide');
-        
-        currentSlide.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        
-        this.classList.add('selected');
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
     });
-});
+
+    //Für die hervorhebung der Auswahl wurde Gemini gefragt
+    document.querySelectorAll('.box-style button').forEach(button => {
+        button.addEventListener('click', function () {
+            const currentSlide = this.closest('.swiper-slide');
+
+            currentSlide.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            this.classList.add('selected');
+        });
+    });
