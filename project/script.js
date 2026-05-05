@@ -262,3 +262,16 @@ const swiper = new Swiper('.swiper', {
         clickable: true,
     },
 });
+
+//Für die hervorhebung der Auswahl wurde Gemini gefragt
+document.querySelectorAll('.box-style button').forEach(button => {
+    button.addEventListener('click', function() {
+        const currentSlide = this.closest('.swiper-slide');
+        
+        currentSlide.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        
+        this.classList.add('selected');
+    });
+});

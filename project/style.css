@@ -752,6 +752,19 @@ button:hover {
     width: 100%;
 }
 
+.box-style button.selected img {
+    filter: drop-shadow(0 0 10px #e10600) drop-shadow(0 0 5px #e10600) !important;
+    transform: scale(1.1);
+}
+
+.box-style button img {
+    pointer-events: none;
+}
+
+.box-style button img {
+    transition: all 0.2s ease;
+}
+
 #char-card1 img {
     width: 180px;
     display: block;
