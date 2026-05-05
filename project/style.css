@@ -753,7 +753,7 @@ button:hover {
 }
 
 .box-style button.selected img {
-    filter: drop-shadow(0 0 10px #e10600) drop-shadow(0 0 5px #e10600) !important;
+    filter: drop-shadow(0 0 10px #e10600) drop-shadow(0 0 5px #e10600);
     transform: scale(1.1);
 }
 
