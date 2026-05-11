@@ -1,338 +1,339 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Racing Dreams</title>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Racing Dreams</title>
+        <link rel="icon" type="image/png"  href="img/UI Panels/favicon.png">
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css">
 
-    <script src="json/tracks.js" defer></script>
-    <script src="json/drivers.js" defer></script>
-    <script src="json/teams.js" defer></script>
+        <script src="json/tracks.js" defer></script>
+        <script src="json/drivers.js" defer></script>
+        <script src="json/teams.js" defer></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-</head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    </head>
 
-<body>
+    <body>
 
-    <!-- ---------------Start Screen--------------- -->
-    <section id="start-menu">
-        <div id="start-content">
-            <div id="logo-start">
-                <img src="img/UI Panels/Logo.png">
-            </div>
+        <!-- ---------------Start Screen--------------- -->
+        <section id="start-menu">
+            <div id="start-content">
+                <div id="logo-start">
+                    <img src="img/UI Panels/Logo.png">
+                </div>
 
-            <div id="menu-btns">
-                <button id="play-btn" onclick="createCharakter()">
-                    <img src="img/Btns/PlayBtn.png">
-                </button>
-                <a href="html/info.html">
-                    <button id="howto-btn">
-                        <img src="img/Btns/HowToBtn.png">
+                <div id="menu-btns">
+                    <button id="play-btn" onclick="createCharakter()">
+                        <img src="img/Btns/PlayBtn.png">
                     </button>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ---------------Create Charakter--------------- -->
-    <section id="char-creator">
-        <h1>Create your Player</h1>
-        <div id="error"></div>
-        <div id="char-content">
-            <div class="inputs">
-                <input type="text" placeholder="Name..." id="player-name">
-                <input type="number" placeholder="Alter..." id="player-age" readonly>
-
-                <select id="team-select">
-                    <option value="" disabled selected>Team wählen...</option>
-
-                    <option value="Haas">Haas F1 Team (Kostenlos)</option>
-                    <option value="Audi">Audi (Kostenlos)</option>
-                    <option value="Williams">Williams (Kostenlos)</option>
-
-                    <option value="Cadillac" disabled>Cadillac - 250.000 €</option>
-                    <option value="Alpine" disabled>Alpine - 500.000 €</option>
-                    <option value="Racing Bulls" disabled>Racing Bulls - 750.000 €</option>
-                    <option value="Aston Martin" disabled>Aston Martin - 1.200.000 €</option>
-                    <option value="Mercedes" disabled>Mercedes - 2.500.000 €</option>
-                    <option value="McLaren" disabled>McLaren - 3.000.000 €</option>
-                    <option value="Ferrari" disabled>Ferrari - 4.500.000 €</option>
-                    <option value="Red Bull Racing" disabled>Red Bull Racing - 6.000.000 €</option>
-                </select>
-            </div>
-
-            <div class="character-cards">
-                <div id="char-card1" onclick="setAge(19)">
-                    <img src="img/Looks/Look1-young.png" class="char-img">
-                </div>
-                <div id="char-card2" onclick="setAge(30)">
-                    <img src="img/Looks/Look2-old.png" class="char-img">
-                </div>
-                <div id="char-card3" onclick="setAge(23)">
-                    <img src="img/Looks/Look3-mid.png" class="char-img">
+                    <a href="html/info.html">
+                        <button id="howto-btn">
+                            <img src="img/Btns/HowToBtn.png">
+                        </button>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <button id="save-btn" onclick="savePlayer()">
-                <img src="img/Btns/SaveBtn.png">
+        <!-- ---------------Create Charakter--------------- -->
+        <section id="char-creator">
+            <h1>Create your Player</h1>
+            <div id="error"></div>
+            <div id="char-content">
+                <div class="inputs">
+                    <input type="text" placeholder="Name..." id="player-name">
+                    <input type="number" placeholder="Alter..." id="player-age" readonly>
+
+                    <select id="team-select">
+                        <option value="" disabled selected>Team wählen...</option>
+
+                        <option value="Haas">Haas F1 Team (Kostenlos)</option>
+                        <option value="Audi">Audi (Kostenlos)</option>
+                        <option value="Williams">Williams (Kostenlos)</option>
+
+                        <option value="Cadillac" disabled>Cadillac - 250.000 €</option>
+                        <option value="Alpine" disabled>Alpine - 500.000 €</option>
+                        <option value="Racing Bulls" disabled>Racing Bulls - 750.000 €</option>
+                        <option value="Aston Martin" disabled>Aston Martin - 1.200.000 €</option>
+                        <option value="Mercedes" disabled>Mercedes - 2.500.000 €</option>
+                        <option value="McLaren" disabled>McLaren - 3.000.000 €</option>
+                        <option value="Ferrari" disabled>Ferrari - 4.500.000 €</option>
+                        <option value="Red Bull Racing" disabled>Red Bull Racing - 6.000.000 €</option>
+                    </select>
+                </div>
+
+                <div class="character-cards">
+                    <div id="char-card1" onclick="setAge(19)">
+                        <img src="img/Looks/Look1-young.png" class="char-img">
+                    </div>
+                    <div id="char-card2" onclick="setAge(30)">
+                        <img src="img/Looks/Look2-old.png" class="char-img">
+                    </div>
+                    <div id="char-card3" onclick="setAge(23)">
+                        <img src="img/Looks/Look3-mid.png" class="char-img">
+                    </div>
+                </div>
+
+                <button id="save-btn" onclick="savePlayer()">
+                    <img src="img/Btns/SaveBtn.png">
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ---------------Career Hub--------------- -->
+        <section id="career-hub">
+
+            <div id="hub-content">
+                <div id="standings-window" class="box-style">
+                    <div class="panel-title">CHAMPIONSHIP STANDINGS</div>
+                    <div id="wm-tabelle">
+                        <div class="drivers"></div>
+                    </div>
+                </div>
+
+                <div id="hub-nav">
+                    <button class="hub-btn">
+                        <img src="img/Btns/Übersicht.png">
+                    </button>
+                    <button class="hub-btn" onclick="raceCalendar()">
+                        <img src="img/Btns/Rennkalender-inactive.png">
+                    </button>
+                </div>
+
+                <div id="info-box" class="box-style">
+                    <div id="next-race-box">
+                        <div class="panel-title">NEXT RACE</div>
+                        <div class="race-details">
+                            <h3></h3>
+                            <p id="track-country"></p>
+                            <p id="track-city"></p>
+                            <img src="" class="track-map">
+                        </div>
+                    </div>
+
+                    <div id="player-profile">
+                        <div class="panel-title">DRIVER PROFILE</div>
+                        <p id="player-money">Geld:</p> <!--Geld berechnen (Local Storage Sprint #4)-->
+                        <p id="hub-player-name"></p>
+                        <p id="player-team"></p>
+                        <p id="charakter"></p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="abreisen-btn" onclick="depart()">
+                <img src="img/Btns/AbreisenBtn.png" alt="Abreisen">
             </button>
-        </div>
+        </section>
 
-    </section>
-
-    <!-- ---------------Career Hub--------------- -->
-    <section id="career-hub">
-
-        <div id="hub-content">
-            <div id="standings-window" class="box-style">
-                <div class="panel-title">CHAMPIONSHIP STANDINGS</div>
-                <div id="wm-tabelle">
-                    <div class="drivers"></div>
-                </div>
-            </div>
-
-            <div id="hub-nav">
+        <!-- ---------------Race Calendar--------------- -->
+        <section id="race-calendar">
+            <div id="calendar-nav">
+                <button class="hub-btn" onclick="careerHub()">
+                    <img src="img/Btns/Übersicht-inactive.png">
+                </button>
                 <button class="hub-btn">
-                    <img src="img/Btns/Übersicht.png">
-                </button>
-                <button class="hub-btn" onclick="raceCalendar()">
-                    <img src="img/Btns/Rennkalender-inactive.png">
+                    <img src="img/Btns/Rennkalender-active.png">
                 </button>
             </div>
 
-            <div id="info-box" class="box-style">
-                <div id="next-race-box">
-                    <div class="panel-title">NEXT RACE</div>
-                    <div class="race-details">
-                        <h3></h3>
-                        <p id="track-country"></p>
-                        <p id="track-city"></p>
-                        <img src="" class="track-map">
+            <div id="calendar-box" class="box-style">
+                <div class="panel-title">SEASON CALENDAR</div>
+
+                <div id="tracks-grid">
+                    <div class="track-card active" id="race-1">
+                        <img src="img/Flags/Bahrain.png" class="flag-img">
+                        <div class="track-name">BAHRAIN</div>
+                        <div class="difficulty">★☆☆☆☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-2">
+                        <img src="img/Flags/Italy.png" class="flag-img">
+                        <div class="track-name">MONZA</div>
+                        <div class="difficulty">★☆☆☆☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-3">
+                        <img src="img/Flags/Austria.png" class="flag-img">
+                        <div class="track-name">SPIELBERG</div>
+                        <div class="difficulty">★★☆☆☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-4">
+                        <img src="img/Flags/UK.png" class="flag-img">
+                        <div class="track-name">SILVERSTONE</div>
+                        <div class="difficulty">★★★☆☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-5">
+                        <img src="img/Flags/Belgium.png" class="flag-img">
+                        <div class="track-name">SPA</div>
+                        <div class="difficulty">★★★☆☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-6">
+                        <img src="img/Flags/Japan.png" class="flag-img">
+                        <div class="track-name">SUZUKA</div>
+                        <div class="difficulty">★★★★☆</div>
+                    </div>
+
+                    <div class="track-card" id="race-7">
+                        <img src="img/Flags/Monaco.png" class="flag-img">
+                        <div class="track-name">MONACO</div>
+                        <div class="difficulty">★★★★★</div>
+                    </div>
+
+                    <div class="track-card" id="race-8">
+                        <img src="img/Flags/Singapore.png" class="flag-img">
+                        <div class="track-name">SINGAPORE</div>
+                        <div class="difficulty">★★★★★</div>
                     </div>
                 </div>
-
-                <div id="player-profile">
-                    <div class="panel-title">DRIVER PROFILE</div>
-                    <p id="player-money">Geld:</p> <!--Geld berechnen (Local Storage Sprint #4)-->
-                    <p id="hub-player-name"></p>
-                    <p id="player-team"></p>
-                    <p id="charakter"></p>
-                </div>
             </div>
-        </div>
+        </section>
 
-        <button id="abreisen-btn" onclick="depart()">
-            <img src="img/Btns/AbreisenBtn.png" alt="Abreisen">
-        </button>
-    </section>
-
-    <!-- ---------------Race Calendar--------------- -->
-    <section id="race-calendar">
-        <div id="calendar-nav">
-            <button class="hub-btn" onclick="careerHub()">
-                <img src="img/Btns/Übersicht-inactive.png">
-            </button>
-            <button class="hub-btn">
-                <img src="img/Btns/Rennkalender-active.png">
-            </button>
-        </div>
-
-        <div id="calendar-box" class="box-style">
-            <div class="panel-title">SEASON CALENDAR</div>
-
-            <div id="tracks-grid">
-                <div class="track-card active" id="race-1">
-                    <img src="img/Flags/Bahrain.png" class="flag-img">
-                    <div class="track-name">BAHRAIN</div>
-                    <div class="difficulty">★☆☆☆☆</div>
-                </div>
-
-                <div class="track-card" id="race-2">
-                    <img src="img/Flags/Italy.png" class="flag-img">
-                    <div class="track-name">MONZA</div>
-                    <div class="difficulty">★☆☆☆☆</div>
-                </div>
-
-                <div class="track-card" id="race-3">
-                    <img src="img/Flags/Austria.png" class="flag-img">
-                    <div class="track-name">SPIELBERG</div>
-                    <div class="difficulty">★★☆☆☆</div>
-                </div>
-
-                <div class="track-card" id="race-4">
-                    <img src="img/Flags/UK.png" class="flag-img">
-                    <div class="track-name">SILVERSTONE</div>
-                    <div class="difficulty">★★★☆☆</div>
-                </div>
-
-                <div class="track-card" id="race-5">
-                    <img src="img/Flags/Belgium.png" class="flag-img">
-                    <div class="track-name">SPA</div>
-                    <div class="difficulty">★★★☆☆</div>
-                </div>
-
-                <div class="track-card" id="race-6">
-                    <img src="img/Flags/Japan.png" class="flag-img">
-                    <div class="track-name">SUZUKA</div>
-                    <div class="difficulty">★★★★☆</div>
-                </div>
-
-                <div class="track-card" id="race-7">
-                    <img src="img/Flags/Monaco.png" class="flag-img">
-                    <div class="track-name">MONACO</div>
-                    <div class="difficulty">★★★★★</div>
-                </div>
-
-                <div class="track-card" id="race-8">
-                    <img src="img/Flags/Singapore.png" class="flag-img">
-                    <div class="track-name">SINGAPORE</div>
-                    <div class="difficulty">★★★★★</div>
-                </div>
+        <!-- ---------------Race Preparation--------------- -->
+        <section id="race-prep">
+            <h1 class="race-title">[COUNTRY] GRAND PRIX</h1>
+            <div class="header">
+                <div id="weather-info-box"></div>
             </div>
-        </div>
-    </section>
 
-    <!-- ---------------Race Preparation--------------- -->
-    <section id="race-prep">
-        <h1 class="race-title">[COUNTRY] GRAND PRIX</h1>
-        <div class="header">
-            <div id="weather-info-box"></div>
-        </div>
+            <div class="swiper">
+                <div class="swiper-wrapper">
 
-        <div class="swiper">
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide prep-column box-style">
-                    <div class="panel-title">RENNZIELE</div>
-                    <div class="button-stack">
-                        <button class="img-selection"><img src="img/Btns/Top4.png" id="goal-1"></button>
-                        <button class="img-selection"><img src="img/Btns/Top10.png" id="goal-2"></button>
-                        <button class="img-selection"><img src="img/Btns/Beenden.png" id="goal-3"></button>
+                    <div class="swiper-slide prep-column box-style">
+                        <div class="panel-title">RENNZIELE</div>
+                        <div class="button-stack">
+                            <button class="img-selection"><img src="img/Btns/Top4.png" id="goal-1"></button>
+                            <button class="img-selection"><img src="img/Btns/Top10.png" id="goal-2"></button>
+                            <button class="img-selection"><img src="img/Btns/Beenden.png" id="goal-3"></button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="swiper-slide prep-column box-style">
-                    <div class="panel-title">REIFENSTRATEGIE</div>
-                    <div class="tire-grid">
-                        <div class="tire-row">
-                            <div class="tire-item">
-                                <button class="img-selection" onclick="selectTire('SOFT')">
-                                    <img src="img/Tires/SoftTire.png">
-                                </button>
-                                <span class="tire-label">SOFT</span>
+                    <div class="swiper-slide prep-column box-style">
+                        <div class="panel-title">REIFENSTRATEGIE</div>
+                        <div class="tire-grid">
+                            <div class="tire-row">
+                                <div class="tire-item">
+                                    <button class="img-selection" onclick="selectTire('SOFT')">
+                                        <img src="img/Tires/SoftTire.png">
+                                    </button>
+                                    <span class="tire-label">SOFT</span>
+                                </div>
+                                <div class="tire-item">
+                                    <button class="img-selection" onclick="selectTire('MEDIUM')">
+                                        <img src="img/Tires/MediumTire.png">
+                                    </button>
+                                    <span class="tire-label">MEDIUM</span>
+                                </div>
+                                <div class="tire-item">
+                                    <button class="img-selection" onclick="selectTire('HARD')">
+                                        <img src="img/Tires/HardTire.png">
+                                    </button>
+                                    <span class="tire-label">HARD</span>
+                                </div>
                             </div>
-                            <div class="tire-item">
-                                <button class="img-selection" onclick="selectTire('MEDIUM')">
-                                    <img src="img/Tires/MediumTire.png">
-                                </button>
-                                <span class="tire-label">MEDIUM</span>
-                            </div>
-                            <div class="tire-item">
-                                <button class="img-selection" onclick="selectTire('HARD')">
-                                    <img src="img/Tires/HardTire.png">
-                                </button>
-                                <span class="tire-label">HARD</span>
+
+                            <div class="tire-row rain-locked centered-rain">
+                                <div class="tire-item small-tire">
+                                    <button class="img-selection" onclick="selectTire('INTER')">
+                                        <img src="img/Tires/InterTire.png">
+                                    </button>
+                                    <span class="tire-label">INTER</span>
+                                </div>
+                                <div class="tire-item small-tire">
+                                    <button class="img-selection" onclick="selectTire('WET')">
+                                        <img src="img/Tires/WetTire.png">
+                                    </button>
+                                    <span class="tire-label">WET</span>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="tire-row rain-locked centered-rain">
-                            <div class="tire-item small-tire">
-                                <button class="img-selection" onclick="selectTire('INTER')">
-                                    <img src="img/Tires/InterTire.png">
-                                </button>
-                                <span class="tire-label">INTER</span>
-                            </div>
-                            <div class="tire-item small-tire">
-                                <button class="img-selection" onclick="selectTire('WET')">
-                                    <img src="img/Tires/WetTire.png">
-                                </button>
-                                <span class="tire-label">WET</span>
-                            </div>
+                    <div class="swiper-slide prep-column box-style">
+                        <div class="panel-title">FAHRZEUG-SETUP</div>
+                        <div class="button-stack setup">
+                            <button class="img-selection" onclick="selectSetup('dry')">
+                                <img src="img/Btns/TrockenSetup.png" id="dry-setup">
+                            </button>
+                            <button class="img-selection" onclick="selectSetup('balanced')">
+                                <img src="img/Btns/AusgewogenesSetup.png" id="balanced-setup">
+                            </button>
+                            <button class="img-selection" onclick="selectSetup('wet')">
+                                <img src="img/Btns/WetSetup.png" id="wet-setup">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide prep-column box-style">
+                        <div class="panel-title" style="margin-top: 20px;">AGRESSIVITÄT</div>
+                        <div class="horizontal-btns">
+                            <button class="img-small" onclick="selectAggression('risiko')">
+                                <img src="img/Btns/Risiko.png">
+                            </button>
+                            <button class="img-small" onclick="selectAggression('ausgewogen')">
+                                <img src="img/Btns/Ausgewogen.png">
+                            </button>
+                            <button class="img-small" onclick="selectAggression('calm')">
+                                <img src="img/Btns/Ruhig.png">
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="swiper-slide prep-column box-style">
-                    <div class="panel-title">FAHRZEUG-SETUP</div>
-                    <div class="button-stack setup">
-                        <button class="img-selection" onclick="selectSetup('dry')">
-                            <img src="img/Btns/TrockenSetup.png" id="dry-setup">
-                        </button>
-                        <button class="img-selection" onclick="selectSetup('balanced')">
-                            <img src="img/Btns/AusgewogenesSetup.png" id="balanced-setup">
-                        </button>
-                        <button class="img-selection" onclick="selectSetup('wet')">
-                            <img src="img/Btns/WetSetup.png" id="wet-setup">
-                        </button>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+
+            <button id="start-race-btn" onclick="startRace()">
+                <img src="img/Btns/RaceStartBtn.png">
+            </button>
+        </section>
+
+        <!-- ---------------Race Results--------------- -->
+        <section id="race-results">
+            <h1 class="race-title">GRAND PRIX RENNERGEBNISSE</h1>
+
+            <div id="results-grid">
+                <div class="results-box box-style-result" style="animation: fadeInLeft 1s ease forwards;">
+                    <div class="results-content">
+                        <p id="res-pos">Position: __</p>
+                        <p id="res-points">+ __ Points</p>
+                        <hr class="divider">
+                        <p class="highlight">WM TABELLEN PLATZ: __</p>
                     </div>
                 </div>
 
-                <div class="swiper-slide prep-column box-style">
-                    <div class="panel-title" style="margin-top: 20px;">AGRESSIVITÄT</div>
-                    <div class="horizontal-btns">
-                        <button class="img-small" onclick="selectAggression('risiko')">
-                            <img src="img/Btns/Risiko.png">
-                        </button>
-                        <button class="img-small" onclick="selectAggression('ausgewogen')">
-                            <img src="img/Btns/Ausgewogen.png">
-                        </button>
-                        <button class="img-small" onclick="selectAggression('calm')">
-                            <img src="img/Btns/Ruhig.png">
-                        </button>
+                <div class="results-box box-style-result" style="animation: fadeInRight 1s ease forwards;">
+                    <div class="results-content">
+                        <p id="res-money">Ziel Geld: + __ €</p>
+                        <hr class="divider">
+                        <p class="highlight" id="res-balance">KONTOSTAND: __ €</p>
+                    </div>
+                </div>
+
+                <div class="results-box summary-box box-style-result" style="animation: fadeInUp 1s ease forwards;">
+                    <div class="results-content">
+                        <h3>RENNZUSAMMENFASSUNG</h3>
+                        <p id="res-summary">Das Rennen wurde erfolgreich beendet.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-
-        <button id="start-race-btn" onclick="startRace()">
-            <img src="img/Btns/RaceStartBtn.png">
-        </button>
-    </section>
-
-    <!-- ---------------Race Results--------------- -->
-    <section id="race-results">
-        <h1 class="race-title">GRAND PRIX RENNERGEBNISSE</h1>
-
-        <div id="results-grid">
-            <div class="results-box box-style-result" style="animation: fadeInLeft 1s ease forwards;">
-                <div class="results-content">
-                    <p id="res-pos">Position: __</p>
-                    <p id="res-points">+ __ Points</p>
-                    <hr class="divider">
-                    <p class="highlight">WM TABELLEN PLATZ: __</p>
-                </div>
-            </div>
-
-            <div class="results-box box-style-result" style="animation: fadeInRight 1s ease forwards;">
-                <div class="results-content">
-                    <p id="res-money">Ziel Geld: + __ €</p>
-                    <hr class="divider">
-                    <p class="highlight" id="res-balance">KONTOSTAND: __ €</p>
-                </div>
-            </div>
-
-            <div class="results-box summary-box box-style-result" style="animation: fadeInUp 1s ease forwards;">
-                <div class="results-content">
-                    <h3>RENNZUSAMMENFASSUNG</h3>
-                    <p id="res-summary">Das Rennen wurde erfolgreich beendet.</p>
-                </div>
-            </div>
-        </div>
-
-        <button id="home-btn" onclick="backHome()">
-            <img src="img/Btns/NachHause.png">
-        </button>
-    </section>
+            <button id="home-btn" onclick="backHome()">
+                <img src="img/Btns/NachHause.png">
+            </button>
+        </section>
 
 
-</body>
+    </body>
 
-</html>
+    </html>
