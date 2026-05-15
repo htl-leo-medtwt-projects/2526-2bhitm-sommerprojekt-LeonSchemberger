@@ -273,7 +273,7 @@ function startRace() {
         } else if (playerPosition < 10) {
             summaryText = `Gut gemacht! Du hast ${earnedPoints} Punkte gesammelt mit Platz ${playerPosition}.`;
         } else if (playerPosition === 10) {
-            summaryText = "Gut gemacht! Du hast ${earnedPoints} Punkt gesammelt mit Platz 10.";
+            summaryText = `Gut gemacht! Du hast ${earnedPoints} Punkt gesammelt mit Platz 10.`;
         } else {
             summaryText = `Du hast das Rennen auf P${playerPosition} beendet, aber leider keine Punkte gesammelt.`;
         }
