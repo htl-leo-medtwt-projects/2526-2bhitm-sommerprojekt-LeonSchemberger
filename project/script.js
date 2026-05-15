@@ -234,6 +234,8 @@ function calculateRacePerformance(driver, myPlayer, track) {
     return score;
 }
 
+const punktesystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+
 function startRace() {
     if (selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
         return;
