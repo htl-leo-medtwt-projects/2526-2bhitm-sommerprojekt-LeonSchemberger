@@ -639,6 +639,7 @@ p {
     grid-column: span 2;
     margin: 0 auto;
     width: 60%;
+    text-align: center;
 }
 
 .results-content {

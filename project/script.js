@@ -1,32 +1,26 @@
 function createCharakter() {
     document.getElementById('start-menu').style.display = 'none';
-
     document.getElementById('char-creator').style.display = 'flex';
 }
 
 function raceCalendar() {
     document.getElementById('career-hub').style.display = 'none';
-
     document.getElementById('race-calendar').style.display = 'flex';
 }
 
 function depart() {
     document.getElementById('career-hub').style.display = 'none';
-
     document.getElementById('race-prep').style.display = 'flex';
-
     generateWeather(0);
 }
 
 function careerHub() {
     document.getElementById('race-calendar').style.display = 'none';
-
-    document.getElementById('career-hub').style.display = 'flex'
+    document.getElementById('career-hub').style.display = 'flex';
 }
 
 function backHome() {
     document.getElementById('race-results').style.display = 'none';
-
     document.getElementById('race-calendar').style.display = 'flex';
 }
 
@@ -45,7 +39,6 @@ function setAge(age) {
 
 function wmStanding() {
     const container = document.querySelector('.drivers');
-
     let table = "";
 
     table += `
@@ -57,7 +50,6 @@ function wmStanding() {
 
     for (let i = 0; i < driversData.length; i++) {
         const driver = driversData[i];
-
         table += `
             <div class="driver-row">
                 <span class="pos">${i + 2}</span>
@@ -66,7 +58,6 @@ function wmStanding() {
             </div>
         `;
     }
-
     container.innerHTML = table;
 }
 
@@ -87,7 +78,7 @@ function updateHub() {
 
     raceBox.querySelector('h3').innerHTML = nextRace.name;
     document.getElementById('track-country').innerHTML = "Land: " + nextRace.country;
-    document.getElementById('track-city').innerHTML = "Stadt: " + nextRace.city
+    document.getElementById('track-city').innerHTML = "Stadt: " + nextRace.city;
     raceBox.querySelector('.track-map').src = nextRace.track_image;
 }
 
@@ -96,11 +87,8 @@ function replaceWorstDriver(selectedTeamName) {
     let teamDrivers = driversData.filter(d => d.team === selectedTeamName);
 
     if (teamDrivers.length > 0) {
-
         teamDrivers.sort((a, b) => a.skill - b.skill);
-
         let worstDriver = teamDrivers[0];
-
         const index = driversData.indexOf(worstDriver);
         if (index !== -1) {
             driversData.splice(index, 1);
@@ -120,11 +108,10 @@ function savePlayer() {
     }
 
     error.innerHTML = "";
-
     replaceWorstDriver(player.team);
 
     document.getElementById('char-creator').style.display = 'none';
-    document.getElementById('career-hub').style.display = 'flex'
+    document.getElementById('career-hub').style.display = 'flex';
 
     updateHub();
     wmStanding();
@@ -141,9 +128,7 @@ let selectedStrategy = {
 function generateWeather(trackIndex) {
     const weatherBox = document.getElementById("weather-info-box");
     const rainRow = document.querySelector(".rain-locked");
-
     const currentTrack = tracksData[trackIndex];
-
     const random = Math.random();
 
     if (random < currentTrack.rain_chance) {
@@ -160,17 +145,9 @@ function generateWeather(trackIndex) {
     }
 }
 
-function selectTire(tireType) {
-    selectedStrategy.tire = tireType;
-}
-
-function selectSetup(setupType) {
-    selectedStrategy.setup = setupType;
-}
-
-function selectAggression(aggressionType) {
-    selectedStrategy.aggression = aggressionType;
-}
+function selectTire(tireType) { selectedStrategy.tire = tireType; }
+function selectSetup(setupType) { selectedStrategy.setup = setupType; }
+function selectAggression(aggressionType) { selectedStrategy.aggression = aggressionType; }
 
 function calculateRacePerformance(driver, myPlayer, track) {
     let team = teamsData.find(t => driver && driver.team && t.name.toLowerCase().includes(driver.team.toLowerCase()));
@@ -218,8 +195,6 @@ function calculateRacePerformance(driver, myPlayer, track) {
 
     } else {
         score = carPower;
-
-
         let aiRandom = (Math.random() * 4) - 2;
         score += aiRandom;
     }
@@ -267,32 +242,55 @@ function startRace() {
 
     rennergebnisse.sort((a, b) => b.score - a.score);
 
-let playerPosition = rennergebnisse.findIndex(p => p.isPlayer) + 1;
+    let playerPosition = rennergebnisse.findIndex(p => p.isPlayer) + 1;
     let playerFinished = rennergebnisse[playerPosition - 1].score !== -1;
 
     let earnedPoints = 0;
+    let summaryText = "";
 
-    if (playerFinished && playerPosition <= 10) {
-        earnedPoints = punktesystem[playerPosition - 1]; 
-    } else {
+    if (!playerFinished) {
+        playerPosition = "DNF";
         earnedPoints = 0;
+
+        if (selectedStrategy.aggression === 'risiko') {
+            summaryText = "Deine aggressive Fahrweise hat dich leider ins Aus befördert.";
+        } else {
+            summaryText = "Leider hast du das Rennen aufgrund eines Defekts nicht beendet.";
+        }
+    } else {
+        if (playerPosition <= 10) {
+            earnedPoints = punktesystem[playerPosition - 1];
+        } else {
+            earnedPoints = 0;
+        }
+
+        if (playerPosition === 1) {
+            summaryText = "Unglaublich! Du hast das Rennen gewonnen!";
+        } else if (playerPosition === 2) {
+            summaryText = "Super! Du hast den zweiten Platz erreicht!";
+        } else if (playerPosition === 3) {
+            summaryText = "Toll! Du hast es auf das Podium geschafft!";
+        } else if (playerPosition < 10) {
+            summaryText = `Gut gemacht! Du hast ${earnedPoints} Punkte gesammelt mit Platz ${playerPosition}.`;
+        } else if (playerPosition === 10) {
+            summaryText = "Gut gemacht! Du hast ${earnedPoints} Punkt gesammelt mit Platz 10.";
+        } else {
+            summaryText = `Du hast das Rennen auf P${playerPosition} beendet, aber leider keine Punkte gesammelt.`;
+        }
     }
 
     document.getElementById("res-pos").innerHTML = `Position: <b>${playerPosition}</b>`;
     document.getElementById("res-points").innerHTML = `+ ${earnedPoints} Punkte`;
 
-    document.querySelector(".highlight").innerHTML = `RENNEN BEENDET AUF P${playerPosition}`;
+    document.getElementById("res-summary").innerHTML = summaryText;
 }
 
 const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
     spaceBetween: 0,
     centeredSlides: true,
-
     effect: 'slide',
-
     resistanceRatio: 0,
-
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -307,11 +305,9 @@ const swiper = new Swiper('.swiper', {
 document.querySelectorAll('.box-style button').forEach(button => {
     button.addEventListener('click', function () {
         const currentSlide = this.closest('.swiper-slide');
-
         currentSlide.querySelectorAll('button').forEach(btn => {
             btn.classList.remove('selected');
         });
-
         this.classList.add('selected');
     });
 });
