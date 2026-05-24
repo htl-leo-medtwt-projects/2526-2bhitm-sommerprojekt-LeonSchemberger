@@ -67,9 +67,9 @@ function wmStanding() {
 }
 
 function updateHub() {
+    document.getElementById("player-money").innerHTML = "Geld: " + player.money.toLocaleString() + " €";
     document.getElementById("hub-player-name").innerHTML = "Name: " + player.name;
     document.getElementById("player-team").innerHTML = "Team: " + player.team;
-    document.getElementById("player-money").innerHTML = "Geld: " + player.money + "€";
 
     if (player.age === 19) player.look = "img/Looks/Look1-young.png";
     if (player.age === 30) player.look = "img/Looks/Look2-old.png";
@@ -214,7 +214,7 @@ function calculateRacePerformance(driver, myPlayer, track) {
 const punktesystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 function startRace() {
-    if (selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
+    if (selectedStrategy.goal === 0|| selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
         return;
     }
 
@@ -251,11 +251,13 @@ function startRace() {
     let playerFinished = rennergebnisse[playerPosition - 1].score !== -1;
 
     let earnedPoints = 0;
+    let earnedMoney = 0;
     let summaryText = "";
 
     if (!playerFinished) {
         playerPosition = "DNF";
         earnedPoints = 0;
+        earnedMoney = 0;
 
         if (selectedStrategy.aggression === 'risiko') {
             summaryText = "Deine aggressive Fahrweise hat dich leider ins Aus befördert.";
@@ -268,6 +270,24 @@ function startRace() {
         } else {
             earnedPoints = 0;
         }
+
+        earnedMoney = currentTrack.base_reward;
+
+        let goalAchieved = false;
+        if (selectedStrategy.goal === "finish") {
+            goalAchieved = true;
+        } else if (selectedStrategy.goal === "top10" && playerPosition <= 10) {
+            goalAchieved = true;
+        } else if (selectedStrategy.goal === "top4" && playerPosition <= 4) {
+            goalAchieved = true;
+        }
+        
+        if (goalAchieved) {
+            earnedMoney += selectedStrategy.goalReward;
+        }
+
+        player.money += earnedMoney;
+        localStorage.setItem("playerMoney", player.money);
 
         if (playerPosition === 1) {
             summaryText = "Unglaublich! Du hast das Rennen gewonnen!";
@@ -287,7 +307,12 @@ function startRace() {
     document.getElementById("res-pos").innerHTML = `Position: <b>${playerPosition}</b>`;
     document.getElementById("res-points").innerHTML = `+ ${earnedPoints} Punkte`;
 
+    document.getElementById("res-money").innerHTML = `Ziel Geld: + ${earnedMoney.toLocaleString()} €`;
+    document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${player.money.toLocaleString()} €`;
+
     document.getElementById("res-summary").innerHTML = summaryText;
+
+    updateHub();
 }
 
 const swiper = new Swiper('.swiper', {
