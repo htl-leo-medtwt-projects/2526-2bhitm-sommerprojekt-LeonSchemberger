@@ -37,6 +37,11 @@ function setAge(age) {
     document.getElementById("player-age").value = age;
 }
 
+function selectGoal(target, reward) {
+    selectedStrategy.goal = target;
+    selectedStrategy.goalReward = reward;
+}
+
 function wmStanding() {
     const container = document.querySelector('.drivers');
     let table = "";
