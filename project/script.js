@@ -28,7 +28,7 @@ let player = {
     name: "",
     age: 0,
     team: "",
-    money: 0,
+    money: parseInt(localStorage.getItem("playerMoney")) || 0,
     look: ""
 };
 
