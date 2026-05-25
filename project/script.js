@@ -59,7 +59,8 @@ let player = {
     age: 0,
     team: "",
     money: parseInt(localStorage.getItem("playerMoney")) || 0,
-    look: ""
+    look: "",
+    points : 0
 };
 
 function checkPlayer() {
