@@ -60,9 +60,36 @@ let player = {
     look: ""
 };
 
+function checkPlayer() {
+
+    const name = document.getElementById("player-name").value;
+    const team = document.getElementById("team-select").value;
+    const age = player.age;
+    const saveBtn = document.getElementById("save-btn");
+
+    if (name === "" || age === 0 || team === "") {
+        saveBtn.disabled = true;
+        saveBtn.style.opacity = "0.5";
+        saveBtn.style.cursor = "not-allowed";
+    } else {
+        saveBtn.disabled = false;
+        saveBtn.style.opacity = "1";
+        saveBtn.style.cursor = "pointer";
+        saveBtn.style.filter = "none";
+    }
+}
+
+//Sorgt dafür, dass die Klicks direkt mitgezählt werden
+document.getElementById("player-name").addEventListener("input", checkPlayer);
+document.getElementById("team-select").addEventListener("change", checkPlayer);
+document.getElementById("char-card1").addEventListener("click", checkPlayer);
+document.getElementById("char-card2").addEventListener("click", checkPlayer);
+document.getElementById("char-card3").addEventListener("click", checkPlayer);
+
 function setAge(age) {
     player.age = age;
     document.getElementById("player-age").value = age;
+    checkPlayer();
 }
 
 function selectGoal(target, reward) {
@@ -146,14 +173,7 @@ function replaceWorstDriver(selectedTeamName) {
 function savePlayer() {
     player.name = document.getElementById("player-name").value;
     player.team = document.getElementById("team-select").value;
-    const error = document.getElementById('error');
 
-    if (player.name === "" || player.age == 0 || player.team === "") {
-        error.innerHTML = "<div>Bitte füllen Sie alles aus!</div>";
-        return;
-    }
-
-    error.innerHTML = "";
     replaceWorstDriver(player.team);
 
     document.getElementById('char-creator').style.display = 'none';
