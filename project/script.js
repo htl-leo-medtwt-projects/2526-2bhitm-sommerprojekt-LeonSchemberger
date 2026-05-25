@@ -32,6 +32,11 @@ function backHome() {
     document.getElementById('race-results').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
 
+    //Damit der Slider, bei einem neuen Rennen, wieder auf die erste Seite zurückspringt, wurde Gemini gefragt
+    if (typeof swiper !== 'undefined') {
+        swiper.slideTo(0, 0);
+    }
+
     selectedStrategy = {
         goal: 0,
         tire: "",
