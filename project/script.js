@@ -45,6 +45,8 @@ function backHome() {
         isRainRace: false
     };
 
+    checkStrategy();
+
     document.querySelectorAll('.box-style button').forEach(button => {
         button.classList.remove('selected');
     });
@@ -79,6 +81,22 @@ function checkPlayer() {
     }
 }
 
+function checkStrategy() {
+    const startBtn = document.getElementById("start-race-btn");
+
+    if (selectedStrategy.goal === 0 || selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
+        startBtn.disabled = true;
+        startBtn.style.opacity = "0.5";
+        startBtn.style.cursor = "not-allowed";
+        startBtn.style.filter = "grayscale(1) brightness(0.4)";
+    } else {
+        startBtn.disabled = false;
+        startBtn.style.opacity = "1";
+        startBtn.style.cursor = "pointer";
+        startBtn.style.filter = "none";
+    }
+}
+
 //Sorgt dafür, dass die Klicks direkt mitgezählt werden
 document.getElementById("player-name").addEventListener("input", checkPlayer);
 document.getElementById("team-select").addEventListener("change", checkPlayer);
@@ -95,6 +113,7 @@ function setAge(age) {
 function selectGoal(target, reward) {
     selectedStrategy.goal = target;
     selectedStrategy.goalReward = reward;
+    checkStrategy();
 }
 
 function wmStanding() {
@@ -102,21 +121,21 @@ function wmStanding() {
     let table = "";
 
     table += `
-    <div class="driver-row">
-        <span class="pos">1</span>
-        <span class="name">${player.name} (DU)</span>
-        <span class="pts">0 PTS</span>
-    </div>`;
+        <div class="driver-row">
+            <span class="pos">1</span>
+            <span class="name">${player.name} (DU)</span>
+            <span class="pts">0 PTS</span>
+        </div>`;
 
     for (let i = 0; i < driversData.length; i++) {
         const driver = driversData[i];
         table += `
-            <div class="driver-row">
-                <span class="pos">${i + 2}</span>
-                <span class="name">${driver.name}</span>
-                <span class="pts">0 PTS</span>
-            </div>
-        `;
+                <div class="driver-row">
+                    <span class="pos">${i + 2}</span>
+                    <span class="name">${driver.name}</span>
+                    <span class="pts">0 PTS</span>
+                </div>
+            `;
     }
     container.innerHTML = table;
 }
@@ -211,9 +230,9 @@ function generateWeather(trackIndex) {
     }
 }
 
-function selectTire(tireType) { selectedStrategy.tire = tireType; }
-function selectSetup(setupType) { selectedStrategy.setup = setupType; }
-function selectAggression(aggressionType) { selectedStrategy.aggression = aggressionType; }
+function selectTire(tireType) { selectedStrategy.tire = tireType; checkStrategy(); }
+function selectSetup(setupType) { selectedStrategy.setup = setupType; checkStrategy(); }
+function selectAggression(aggressionType) { selectedStrategy.aggression = aggressionType; checkStrategy(); }
 
 function calculateRacePerformance(driver, myPlayer, track) {
     let team = teamsData.find(t => driver && driver.team && t.name.toLowerCase().includes(driver.team.toLowerCase()));
@@ -275,10 +294,6 @@ function calculateRacePerformance(driver, myPlayer, track) {
 const punktesystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 function startRace() {
-    if (selectedStrategy.goal === 0 || selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
-        return;
-    }
-
     const currentTrack = tracksData[currentRaceIndex];
 
     document.getElementById('race-prep').style.display = 'none';
