@@ -13,9 +13,14 @@ function depart() {
         alert("Keine weiteren Rennen verfügbar!");
         return;
     }
+
+    const currentTrack = tracksData[currentRaceIndex];
+
+    document.getElementById('prep-race-title').innerHTML = `${currentTrack.country.toUpperCase()} GRAND PRIX`;
+
     document.getElementById('career-hub').style.display = 'none';
     document.getElementById('race-prep').style.display = 'flex';
-    generateWeather(0);
+    generateWeather(currentRaceIndex);
 }
 
 function careerHub() {
