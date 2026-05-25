@@ -9,6 +9,10 @@ function raceCalendar() {
 }
 
 function depart() {
+    if (currentRaceIndex >= tracksData.length) {
+        alert("Keine weiteren Rennen verfügbar!");
+        return;
+    }
     document.getElementById('career-hub').style.display = 'none';
     document.getElementById('race-prep').style.display = 'flex';
     generateWeather(0);
@@ -22,7 +26,21 @@ function careerHub() {
 function backHome() {
     document.getElementById('race-results').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
+
+    selectedStrategy = {
+        goal: 0,
+        tire: "",
+        setup: "",
+        aggression: "",
+        isRainRace: false
+    };
+
+    document.querySelectorAll('.box-style button').forEach(button => {
+        button.classList.remove('selected');
+    });
 }
+
+let currentRaceIndex = 0;
 
 let player = {
     name: "",
@@ -78,13 +96,26 @@ function updateHub() {
     const charDiv = document.getElementById("charakter");
     charDiv.innerHTML = `<img src ="${player.look}" style="width: 180px; margin-top: 20px">`;
 
-    const nextRace = tracksData[0];
+    let displayIndex = currentRaceIndex;
+    if (displayIndex >= tracksData.length) {
+        displayIndex = 0;
+    }
+
+    const nextRace = tracksData[displayIndex];
     const raceBox = document.querySelector("#next-race-box .race-details");
 
     raceBox.querySelector('h3').innerHTML = nextRace.name;
     document.getElementById('track-country').innerHTML = "Land: " + nextRace.country;
     document.getElementById('track-city').innerHTML = "Stadt: " + nextRace.city;
     raceBox.querySelector('.track-map').src = nextRace.track_image;
+
+    document.querySelectorAll('.track-card').forEach((card, index) => {
+        if (index === displayIndex) {
+            card.classList.add('active');
+        } else {
+            card.classList.remove('active');
+        }
+    });
 }
 
 //Um den schlechteren Fahrer des beigetreten Teams zu ersetzten wurde Gemini gefragt
@@ -214,11 +245,11 @@ function calculateRacePerformance(driver, myPlayer, track) {
 const punktesystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 function startRace() {
-    if (selectedStrategy.goal === 0|| selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
+    if (selectedStrategy.goal === 0 || selectedStrategy.tire === "" || selectedStrategy.setup === "" || selectedStrategy.aggression === "") {
         return;
     }
 
-    const currentTrack = tracksData[0];
+    const currentTrack = tracksData[currentRaceIndex];
 
     document.getElementById('race-prep').style.display = 'none';
     document.getElementById('race-results').style.display = 'flex';
@@ -281,7 +312,7 @@ function startRace() {
         } else if (selectedStrategy.goal === "top4" && playerPosition <= 4) {
             goalAchieved = true;
         }
-        
+
         if (goalAchieved) {
             earnedMoney += selectedStrategy.goalReward;
         }
@@ -303,6 +334,8 @@ function startRace() {
             summaryText = `Du hast das Rennen auf P${playerPosition} beendet, aber leider keine Punkte gesammelt.`;
         }
     }
+
+    currentRaceIndex++;
 
     document.getElementById("res-pos").innerHTML = `Position: <b>${playerPosition}</b>`;
     document.getElementById("res-points").innerHTML = `+ ${earnedPoints} Punkte`;
