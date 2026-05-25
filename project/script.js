@@ -119,24 +119,39 @@ function selectGoal(target, reward) {
 
 function wmStanding() {
     const container = document.querySelector('.drivers');
-    let table = "";
+    if (!container) return;
+    
+    let allDrivers = [];
 
-    table += `
-        <div class="driver-row">
-            <span class="pos">1</span>
-            <span class="name">${player.name} (DU)</span>
-            <span class="pts">0 PTS</span>
-        </div>`;
+    allDrivers.push({
+        name: player.name + " (DU)",
+        points: player.points || 0,
+        isPlayer: true 
+    });
 
     for (let i = 0; i < driversData.length; i++) {
-        const driver = driversData[i];
+        let driver = driversData[i];
+        allDrivers.push({
+            name: driver.name,
+            points: driver.points || 0,
+            isPlayer: false
+        });
+    }
+
+    allDrivers.sort((a, b) => b.points - a.points);
+
+    let table = "";
+    for (let i = 0; i < allDrivers.length; i++) {
+        const driver = allDrivers[i];
+        const highlightClass = driver.isPlayer ? "player-highlight" : "";
+
         table += `
-                <div class="driver-row">
-                    <span class="pos">${i + 2}</span>
-                    <span class="name">${driver.name}</span>
-                    <span class="pts">0 PTS</span>
-                </div>
-            `;
+            <div class="driver-row ${highlightClass}">
+                <span class="pos">${i + 1}</span>
+                <span class="name">${driver.name}</span>
+                <span class="pts">${driver.points} PTS</span>
+            </div>
+        `;
     }
     container.innerHTML = table;
 }
@@ -292,7 +307,7 @@ function calculateRacePerformance(driver, myPlayer, track) {
     return score;
 }
 
-const punktesystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+const pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 function startRace() {
     const currentTrack = tracksData[currentRaceIndex];
@@ -300,12 +315,12 @@ function startRace() {
     document.getElementById('race-prep').style.display = 'none';
     document.getElementById('race-results').style.display = 'flex';
 
-    let rennergebnisse = [];
+    let raceResults = [];
 
     let playerDriverObj = { team: player.team };
     let playerPower = calculateRacePerformance(playerDriverObj, true, currentTrack);
 
-    rennergebnisse.push({
+    raceResults.push({
         name: player.name + " (DU)",
         score: playerPower,
         isPlayer: true
@@ -315,17 +330,34 @@ function startRace() {
         let driver = driversData[i];
         let aiPower = calculateRacePerformance(driver, false, currentTrack);
 
-        rennergebnisse.push({
+        raceResults.push({
             name: driver.name,
             score: aiPower,
             isPlayer: false
         });
     }
 
-    rennergebnisse.sort((a, b) => b.score - a.score);
+    raceResults.sort((a, b) => b.score - a.score);
 
-    let playerPosition = rennergebnisse.findIndex(p => p.isPlayer) + 1;
-    let playerFinished = rennergebnisse[playerPosition - 1].score !== -1;
+    //Es wurde viel mit der Inline Suggest von VS Code gearbeitet, damit die Punktevergabe korrekt funktioniert
+    for (let i = 0; i < pointsSystem.length; i++) {
+        if (raceResults[i] && raceResults[i].score !== -1) {
+            let pointsForPosition = pointsSystem[i];
+
+            if (raceResults[i].isPlayer) {
+                player.points += pointsForPosition;
+            } else {
+                let kiDriver = driversData.find(d => d.name === raceResults[i].name);
+                if (kiDriver) {
+                    if (!kiDriver.points) kiDriver.points = 0;
+                    kiDriver.points += pointsForPosition;
+                }
+            }
+        }
+    }
+
+    let playerPosition = raceResults.findIndex(p => p.isPlayer) + 1;
+    let playerFinished = raceResults[playerPosition - 1].score !== -1;
 
     let earnedPoints = 0;
     let earnedMoney = 0;
@@ -343,7 +375,7 @@ function startRace() {
         }
     } else {
         if (playerPosition <= 10) {
-            earnedPoints = punktesystem[playerPosition - 1];
+            earnedPoints = pointsSystem[playerPosition - 1];
         } else {
             earnedPoints = 0;
         }
@@ -392,6 +424,7 @@ function startRace() {
     document.getElementById("res-summary").innerHTML = summaryText;
 
     updateHub();
+    wmStanding();
 }
 
 const swiper = new Swiper('.swiper', {
