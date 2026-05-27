@@ -10,7 +10,7 @@ const driversData = [
         "id": 2,
         "name": "Isack Hadjar",
         "team": "Red Bull Racing",
-        "skill": 82,
+        "skill": 80,
         "points": 0
     },
     {
@@ -52,7 +52,7 @@ const driversData = [
         "id": 8,
         "name": "Kimi Antonelli",
         "team": "Mercedes",
-        "skill": 84,
+        "skill": 87,
         "points": 0
     },
     {
@@ -66,7 +66,7 @@ const driversData = [
         "id": 10,
         "name": "Lance Stroll",
         "team": "Aston Martin",
-        "skill": 80,
+        "skill": 75,
         "points": 0
     },
     {
@@ -80,7 +80,7 @@ const driversData = [
         "id": 12,
         "name": "Franco Colapinto",
         "team": "Alpine",
-        "skill": 81
+        "skill": 80
         , "points": 0
     },
     {
@@ -108,7 +108,7 @@ const driversData = [
         "id": 16,
         "name": "Arvid Lindblad",
         "team": "Racing Bulls",
-        "skill": 79,
+        "skill": 75,
         "points": 0
     },
     {
