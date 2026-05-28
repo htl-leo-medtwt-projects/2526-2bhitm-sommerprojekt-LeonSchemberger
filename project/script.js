@@ -1,6 +1,6 @@
 function createCharakter() {
     document.getElementById('start-menu').style.display = 'none';
-    document.getElementById('char-creator').style.display = 'flex';
+    document.getElementById('race-start-lights').style.display = 'flex';
 }
 
 function raceCalendar() {
@@ -309,11 +309,11 @@ function calculateRacePerformance(driver, myPlayer, track) {
 
 const pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
-function startRace() {
+function loadingScreen() {
     const currentTrack = tracksData[currentRaceIndex];
 
     document.getElementById('race-prep').style.display = 'none';
-    document.getElementById('race-results').style.display = 'flex';
+    document.getElementById('race-start-lights').style.display = 'flex';
 
     let raceResults = [];
 

@@ -596,8 +596,58 @@ p {
                    Loading Screen
 ================================================== */
 
+#race-start-lights {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: url('img/Backgrounds/StartProcedure.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 60px;
+}
 
+.lights-container {
+    display: flex;
+    background: #111116;
+    padding: 20px 40px;
+    border-radius: 12px;
+    gap: 25px;
+    border: 1px solid white;
+}
 
+.light-post {
+    width: 65px;
+    height: 130px;
+    background: #1c1c24;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333;
+}
+
+.light-bulb {
+    width: 48px;
+    height: 48px;
+    background: #25252b;
+    border-radius: 50%;
+}
+
+.light-bulb.red {
+    background: red;
+}
+
+.light-bulb.green {
+    background: #2ecc71;
+}
+
+#lights-go-btn img {
+    width: 240px;
+    display: block;
+}
 /* ==================================================
                    Race Results
 ================================================== */
