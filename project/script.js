@@ -60,7 +60,7 @@ let player = {
     team: "",
     money: parseInt(localStorage.getItem("playerMoney")) || 0,
     look: "",
-    points : 0
+    points: 0
 };
 
 function checkPlayer() {
@@ -120,13 +120,13 @@ function selectGoal(target, reward) {
 function wmStanding() {
     const container = document.querySelector('.drivers');
     if (!container) return;
-    
+
     let allDrivers = [];
 
     allDrivers.push({
         name: player.name + " (DU)",
         points: player.points || 0,
-        isPlayer: true 
+        isPlayer: true
     });
 
     for (let i = 0; i < driversData.length; i++) {
@@ -417,11 +417,37 @@ function startRace() {
 
     document.getElementById("res-pos").innerHTML = `Position: <b>${playerPosition}</b>`;
     document.getElementById("res-points").innerHTML = `+ ${earnedPoints} Punkte`;
+    document.getElementById("res-summary").innerHTML = summaryText;
+
+    let oldMoney = player.money - earnedMoney;
+    let newMoney = player.money;
 
     document.getElementById("res-money").innerHTML = `Ziel Geld: + ${earnedMoney.toLocaleString()} €`;
     document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${player.money.toLocaleString()} €`;
 
-    document.getElementById("res-summary").innerHTML = summaryText;
+    let startTime = null;
+    const duration = 2000;
+
+    function animateMoney(currentTime) {
+        if (!startTime) startTime = currentTime;
+        let progress = currentTime - startTime;
+        let percentage = Math.min(progress / duration, 1);
+
+        let currentEarned = Math.floor(earnedMoney * percentage);
+        let currentBalance = Math.floor(oldMoney + currentEarned);
+
+        document.getElementById("res-money").innerHTML = `Ziel Geld: + ${currentEarned.toLocaleString()} €`;
+        document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${currentBalance.toLocaleString()} €`;
+        
+        if (progress < duration) {
+            requestAnimationFrame(animateMoney);
+        } else {
+            document.getElementById("res-money").innerHTML = `Ziel Geld: + ${earnedMoney.toLocaleString()} €`;
+            document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${player.money.toLocaleString()} €`;
+        }
+    }
+    
+    requestAnimationFrame(animateMoney);
 
     updateHub();
     wmStanding();
