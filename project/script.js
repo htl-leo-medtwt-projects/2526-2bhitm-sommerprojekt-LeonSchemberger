@@ -425,8 +425,13 @@ function startRace() {
     document.getElementById("res-money").innerHTML = `Ziel Geld: + ${earnedMoney.toLocaleString()} €`;
     document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${player.money.toLocaleString()} €`;
 
+    const boxes = document.querySelectorAll('.box-style-result');
+    boxes[0].style.animationDelay = '0.2s';
+    boxes[1].style.animationDelay = '1.2s';
+    boxes[2].style.animationDelay = '2.2s';
+
     let startTime = null;
-    const duration = 2000;
+    const duration = 1500;
 
     function animateMoney(currentTime) {
         if (!startTime) startTime = currentTime;
