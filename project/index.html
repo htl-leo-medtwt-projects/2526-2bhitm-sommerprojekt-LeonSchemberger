@@ -302,17 +302,41 @@
         </button>
     </section>
 
+    <!-- ---------------Loading Screen--------------- -->
+    <section id="race-start-lights" style="display: none;">
+        <div class="lights-container">
+            <div class="light-post">
+                <div class="light"></div>
+            </div>
+            <div class="light-post">
+                <div class="light"></div>
+            </div>
+            <div class="light-post">
+                <div class="light"></div>
+            </div>
+            <div class="light-post">
+                <div class="light"></div>
+            </div>
+            <div class="light-post">
+                <div class="light"></div>
+            </div>
+        </div>
+
+        <button id="lights-go-btn" style="display: none;" onclick="raceDecision()">
+            <img src="img/Btns/RaceStartBtn.png">
+        </button>
+    </section>
+
     <!-- ---------------Race Results--------------- -->
     <section id="race-results">
-        <h1 class="race-title">GRAND PRIX RENNERGEBNISSE</h1>
+        <h1 class="race-title">GRAND PRIX RACE RESULTS</h1>
 
         <div id="results-grid">
             <div class="results-box box-style-result" style="animation: fadeInLeft 1s ease forwards;">
                 <div class="results-content">
                     <p id="res-pos"></p>
-                    <p id="res-points"></p>
                     <hr class="divider">
-                    <p class="highlight"></p>
+                    <p id="res-points"></p>
                 </div>
             </div>
 
