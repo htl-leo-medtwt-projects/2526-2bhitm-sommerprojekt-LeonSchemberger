@@ -430,29 +430,25 @@ function startRace() {
     boxes[1].style.animationDelay = '1.2s';
     boxes[2].style.animationDelay = '2.2s';
 
-    let startTime = null;
-    const duration = 1500;
+    setTimeout(() => {
+        let startTime = null;
+        const duration = 1500;
 
-    function animateMoney(currentTime) {
-        if (!startTime) startTime = currentTime;
-        let progress = currentTime - startTime;
-        let percentage = Math.min(progress / duration, 1);
+        function animateCounters(currentTime) {
+            if (!startTime) startTime = currentTime;
+            let progress = currentTime - startTime;
+            let percent = Math.min(progress / duration, 1);
 
-        let currentEarned = Math.floor(earnedMoney * percentage);
-        let currentBalance = Math.floor(oldMoney + currentEarned);
+            let currentEarned = Math.floor(earnedMoney * percent);
+            let currentTotal = Math.floor(oldMoney + currentEarned);
 
-        document.getElementById("res-money").innerHTML = `Ziel Geld: + ${currentEarned.toLocaleString()} €`;
-        document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${currentBalance.toLocaleString()} €`;
-        
-        if (progress < duration) {
-            requestAnimationFrame(animateMoney);
-        } else {
-            document.getElementById("res-money").innerHTML = `Ziel Geld: + ${earnedMoney.toLocaleString()} €`;
-            document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${player.money.toLocaleString()} €`;
+            document.getElementById("res-money").innerHTML = `Ziel Geld: + ${currentEarned.toLocaleString()} €`;
+            document.getElementById("res-balance").innerHTML = `KONTOSTAND: ${currentTotal.toLocaleString()} €`;
+
+            if (progress < duration) requestAnimationFrame(animateCounters);
         }
-    }
-    
-    requestAnimationFrame(animateMoney);
+        requestAnimationFrame(animateCounters);
+    }, 1200);
 
     updateHub();
     wmStanding();
