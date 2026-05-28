@@ -613,6 +613,7 @@ p {
     display: flex;
     background: #111116;
     padding: 20px 40px;
+    margin-top: 100px;
     border-radius: 12px;
     gap: 25px;
     border: 1px solid white;
@@ -645,7 +646,7 @@ p {
 }
 
 #lights-go-btn img {
-    width: 240px;
+    width: 350px;
     display: block;
 }
 /* ==================================================

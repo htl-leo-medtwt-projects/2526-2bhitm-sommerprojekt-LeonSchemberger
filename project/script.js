@@ -1,11 +1,17 @@
 function createCharakter() {
     document.getElementById('start-menu').style.display = 'none';
-    document.getElementById('race-start-lights').style.display = 'flex';
+    document.getElementById('char-creator').style.display = 'flex';
 }
 
 function raceCalendar() {
     document.getElementById('career-hub').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
+}
+
+function loadingScreen() {
+    document.getElementById('race-prep').style.display = 'none';
+    document.getElementById('race-start-lights').style.display = 'flex';
+    runLights();
 }
 
 function depart() {
@@ -307,13 +313,49 @@ function calculateRacePerformance(driver, myPlayer, track) {
     return score;
 }
 
+function runLights() {
+    const bulbs = document.querySelectorAll('.light-bulb');
+    const goBtn = document.getElementById('lights-go-btn');
+
+    bulbs[0].classList.remove('red', 'green');
+    bulbs[1].classList.remove('red', 'green');
+    bulbs[2].classList.remove('red', 'green');
+    bulbs[3].classList.remove('red', 'green');
+    bulbs[4].classList.remove('red', 'green');
+    goBtn.style.display = 'none';
+
+    setTimeout(() => { bulbs[0].classList.add('red'); }, 1000);
+    setTimeout(() => { bulbs[1].classList.add('red'); }, 2000);
+    setTimeout(() => { bulbs[2].classList.add('red'); }, 3000);
+    setTimeout(() => { bulbs[3].classList.add('red'); }, 4000); 
+    setTimeout(() => { bulbs[4].classList.add('red'); }, 5000); 
+
+    const waitTime = 2000 + Math.random() * 1000;
+
+    setTimeout(() => {
+        bulbs[0].classList.remove('red');
+        bulbs[1].classList.remove('red');
+        bulbs[2].classList.remove('red');
+        bulbs[3].classList.remove('red');
+        bulbs[4].classList.remove('red');
+
+        bulbs[0].classList.add('green');
+        bulbs[1].classList.add('green');
+        bulbs[2].classList.add('green');
+        bulbs[3].classList.add('green');
+        bulbs[4].classList.add('green');
+
+        goBtn.style.display = 'block';
+    }, 5000 + waitTime);
+}
+
 const pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
-function loadingScreen() {
+function startRace() {
     const currentTrack = tracksData[currentRaceIndex];
 
     document.getElementById('race-prep').style.display = 'none';
-    document.getElementById('race-start-lights').style.display = 'flex';
+    document.getElementById('race-results').style.display = 'flex';
 
     let raceResults = [];
 
