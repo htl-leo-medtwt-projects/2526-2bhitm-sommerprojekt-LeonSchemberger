@@ -519,3 +519,29 @@ document.querySelectorAll('.box-style button').forEach(button => {
         this.classList.add('selected');
     });
 });
+
+let activeEvent = null;
+
+function raceDecision() {
+    if (!raceEvents || raceEvents.length === 0) return;
+
+    document.getElementById('race-start-lights').style.display = 'none';
+    document.getElementById('race-event-screen').style.display = 'flex';
+
+    const eventIndex = currentRaceIndex % raceEvents.length;
+    activeEvent = raceEvents[eventIndex];
+
+    document.getElementById('event-image').src = `img/Backgrounds/Entscheidungen/${activeEvent.image}`; 
+    document.getElementById('event-btn-1').innerHTML = activeEvent.btn1Text;
+    document.getElementById('event-btn-2').innerHTML = activeEvent.btn2Text;
+}
+
+function handleEventDecision(decisionNumber) {
+    if (!activeEvent) return;
+
+    document.getElementById('race-event-screen').style.display = 'none';
+    activeEvent = null;
+
+    document.getElementById('race-results').style.display = 'flex';
+    startRace();
+}
