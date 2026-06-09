@@ -531,7 +531,7 @@ function raceDecision() {
     const eventIndex = currentRaceIndex % raceEvents.length;
     activeEvent = raceEvents[eventIndex];
 
-    document.getElementById('event-image').src = `img/Backgrounds/Entscheidungen/${activeEvent.image}`; 
+    document.getElementById('race-event-screen').style.backgroundImage = `url('img/Backgrounds/Entscheidungen/${activeEvent.image}')`; 
     document.getElementById('event-btn-1').innerHTML = activeEvent.btn1Text;
     document.getElementById('event-btn-2').innerHTML = activeEvent.btn2Text;
 }

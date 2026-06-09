@@ -718,6 +718,27 @@ p {
 }
 
 /* ==================================================
+                    Race Decisions
+================================================== */
+#race-event-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ==================================================
                         Buttons
 ================================================== */
 button {
@@ -766,6 +787,29 @@ button:hover {
 #home-btn {
     position: absolute;
     bottom: 60px;
+}
+
+.event-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.event-buttons button {
+    padding: 20px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.event-buttons button:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
 }
 
 /* ==================================================

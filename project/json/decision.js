@@ -10,8 +10,8 @@ const raceEvents = [
         id: "boxenstopp_fehler",
         image: "BoxenstoppFehler.png",
         radioText: "TEAM RADIO: Problem beim Reifenwechsel! Das vordere linke Rad klemmt! Sollen wir die sichere Variante wählen und das Gewinde reinigen, oder den Reifen sofort festknallen und das Risiko eingehen?",
-        btn1Text: "Gewinde reinigen (Sicher)",
-        btn2Text: "Sofort festknallen (Risiko)"
+        btn1Text: "Gewinde reinigen",
+        btn2Text: "Sofort festknallen"
     },
     {
         id: "boxen_poker",
