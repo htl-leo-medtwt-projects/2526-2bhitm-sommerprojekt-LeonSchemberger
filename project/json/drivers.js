@@ -10,7 +10,7 @@ const driversData = [
         "id": 2,
         "name": "Isack Hadjar",
         "team": "Red Bull Racing",
-        "skill": 80,
+        "skill": 75,
         "points": 0
     },
     {
