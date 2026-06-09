@@ -354,9 +354,6 @@ const pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 function startRace() {
     const currentTrack = tracksData[currentRaceIndex];
 
-    document.getElementById('race-prep').style.display = 'none';
-    document.getElementById('race-results').style.display = 'flex';
-
     let raceResults = [];
 
     let playerDriverObj = { team: player.team };
