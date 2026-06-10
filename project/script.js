@@ -558,81 +558,81 @@ function handleEventDecision(decisionNumber) {
 
     if (activeEvent.image === "AutoQuer.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -15;
+            decisionImpact.scoreBonus = -5;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
-            decisionImpact.scoreBonus = 20;
-            decisionImpact.additionalDnfChance = 0.35;
+            decisionImpact.scoreBonus = 5;
+            decisionImpact.additionalDnfChance = 0.20;
             decisionImpact.chosenText = activeEvent.btn2Text;
         }
     } 
     
     else if (activeEvent.image === "BoxenstoppFehler.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -25;
+            decisionImpact.scoreBonus = -8;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
             decisionImpact.chosenText = activeEvent.btn2Text;
             if (Math.random() < 0.7) {
-                decisionImpact.scoreBonus = 15;
+                decisionImpact.scoreBonus = 7;
             } else {
-                decisionImpact.additionalDnfChance = 0.9;
+                decisionImpact.additionalDnfChance = 0.5;
             }
         }
     }
 
     else if (activeEvent.image === "BoxPoker.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 18;
+            decisionImpact.scoreBonus = 4;
             decisionImpact.additionalDnfChance = 0.05;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
-            decisionImpact.scoreBonus = -15;
+            decisionImpact.scoreBonus = -6;
             decisionImpact.chosenText = activeEvent.btn2Text;
         }
     }
 
     else if (activeEvent.image === "Bremsduell.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 22;
+            decisionImpact.scoreBonus = 7;
             decisionImpact.additionalDnfChance = 0.30;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
-            decisionImpact.scoreBonus = 2;
+            decisionImpact.scoreBonus = 1;
             decisionImpact.chosenText = activeEvent.btn2Text;
         }
     }
 
     else if (activeEvent.image === "Motor.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 30;
+            decisionImpact.scoreBonus = 10;
             decisionImpact.chosenText = activeEvent.btn1Text;
             if (Math.random() < 0.55) {
-                decisionImpact.additionalDnfChance = 1.0;
+                decisionImpact.additionalDnfChance = 0.4;
             }
         } else {
-            decisionImpact.scoreBonus = -8;
+            decisionImpact.scoreBonus = -2;
             decisionImpact.chosenText = activeEvent.btn2Text;
         }
     }
 
     else if (activeEvent.image === "Platten.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -20;
+            decisionImpact.scoreBonus = -12;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
             decisionImpact.chosenText = activeEvent.btn2Text;
-            if (Math.random() < 0.40) {
-                decisionImpact.scoreBonus = 5;
+            if (Math.random() < 0.50) {
+                decisionImpact.scoreBonus = 2;
             } else {
-                decisionImpact.additionalDnfChance = 1.0;
+                decisionImpact.additionalDnfChance = 0.4;
             }
         }
     }
 
     else if (activeEvent.image === "Regen.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 15;
+            decisionImpact.scoreBonus = 3;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
             decisionImpact.scoreBonus = -40;
@@ -643,10 +643,10 @@ function handleEventDecision(decisionNumber) {
 
     else if (activeEvent.image === "Unfall.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 12;
+            decisionImpact.scoreBonus = 4;
             decisionImpact.chosenText = activeEvent.btn1Text;
         } else {
-            decisionImpact.scoreBonus = -5;
+            decisionImpact.scoreBonus = -1;
             decisionImpact.additionalDnfChance = 0.20;
             decisionImpact.chosenText = activeEvent.btn2Text;
         }
