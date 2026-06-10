@@ -34,6 +34,12 @@ function careerHub() {
     document.getElementById('career-hub').style.display = 'flex';
 }
 
+let decisionImpact = {
+    scoreBonus: 0,
+    additionalDnfChance: 0,
+    chosenText: ""
+};
+
 function backHome() {
     document.getElementById('race-results').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
@@ -49,6 +55,12 @@ function backHome() {
         setup: "",
         aggression: "",
         isRainRace: false
+    };
+
+    decisionImpact = {
+        scoreBonus: 0,
+        additionalDnfChance: 0,
+        chosenText: ""
     };
 
     checkStrategy();
@@ -266,6 +278,9 @@ function calculateRacePerformance(driver, myPlayer, track) {
     if (myPlayer === true) {
         score = carPower;
 
+        score += decisionImpact.scoreBonus;
+        dnfChance += decisionImpact.additionalDnfChance;
+
         if (selectedStrategy.isRainRace === true) {
             if (selectedStrategy.tire === 'WET') score += 12;
             else if (selectedStrategy.tire === 'INTER') score += 6;
@@ -407,7 +422,9 @@ function startRace() {
         earnedPoints = 0;
         earnedMoney = 0;
 
-        if (selectedStrategy.aggression === 'risiko') {
+        if (decisionImpact.additionalDnfChance > 0 && Math.random() < 0.7) {
+            summaryText = `Deine Entscheidung für "${decisionImpact.chosenText}" führte zu einem fatalen Crash!`;
+        } else if (selectedStrategy.aggression === 'risiko') {
             summaryText = "Deine aggressive Fahrweise hat dich leider ins Aus befördert.";
         } else {
             summaryText = "Leider hast du das Rennen aufgrund eines Defekts nicht beendet.";
@@ -538,6 +555,102 @@ function raceDecision() {
 
 function handleEventDecision(decisionNumber) {
     if (!activeEvent) return;
+
+    if (activeEvent.image === "AutoQuer.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = -15;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.scoreBonus = 20;
+            decisionImpact.additionalDnfChance = 0.35;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    } 
+    
+    else if (activeEvent.image === "BoxenstoppFehler.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = -25;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.chosenText = activeEvent.btn2Text;
+            if (Math.random() < 0.7) {
+                decisionImpact.scoreBonus = 15;
+            } else {
+                decisionImpact.additionalDnfChance = 0.9;
+            }
+        }
+    }
+
+    else if (activeEvent.image === "BoxPoker.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = 18;
+            decisionImpact.additionalDnfChance = 0.05;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.scoreBonus = -15;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    }
+
+    else if (activeEvent.image === "Bremsduell.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = 22;
+            decisionImpact.additionalDnfChance = 0.30;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.scoreBonus = 2;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    }
+
+    else if (activeEvent.image === "Motor.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = 30;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+            if (Math.random() < 0.55) {
+                decisionImpact.additionalDnfChance = 1.0;
+            }
+        } else {
+            decisionImpact.scoreBonus = -8;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    }
+
+    else if (activeEvent.image === "Platten.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = -20;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.chosenText = activeEvent.btn2Text;
+            if (Math.random() < 0.40) {
+                decisionImpact.scoreBonus = 5;
+            } else {
+                decisionImpact.additionalDnfChance = 1.0;
+            }
+        }
+    }
+
+    else if (activeEvent.image === "Regen.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = 15;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.scoreBonus = -40;
+            decisionImpact.additionalDnfChance = 0.60;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    }
+
+    else if (activeEvent.image === "Unfall.png") {
+        if (decisionNumber === 1) {
+            decisionImpact.scoreBonus = 12;
+            decisionImpact.chosenText = activeEvent.btn1Text;
+        } else {
+            decisionImpact.scoreBonus = -5;
+            decisionImpact.additionalDnfChance = 0.20;
+            decisionImpact.chosenText = activeEvent.btn2Text;
+        }
+    }
 
     document.getElementById('race-event-screen').style.display = 'none';
     activeEvent = null;
