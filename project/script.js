@@ -71,6 +71,7 @@ function backHome() {
 }
 
 let currentRaceIndex = 0;
+let tireWear = 0;
 
 let player = {
     name: "",
@@ -538,6 +539,8 @@ document.querySelectorAll('.box-style button').forEach(button => {
 });
 
 let activeEvent = null;
+
+let currentRaceRound = 0;
 
 function raceDecision() {
     if (!raceEvents || raceEvents.length === 0) return;

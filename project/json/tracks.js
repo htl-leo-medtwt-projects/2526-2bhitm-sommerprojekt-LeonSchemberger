@@ -7,6 +7,7 @@ const tracksData = [
     "rain_chance": 0.05,
     "base_reward": 120000,
     "difficulty": 1,
+    "rounds": 57,
     "image": "img/Flags/Bahrain.png",
     "track_image": "img/Tracks/BahrainTrack.png"
   },
@@ -18,6 +19,7 @@ const tracksData = [
     "rain_chance": 0.15,
     "base_reward": 110000,
     "difficulty": 1,
+    "rounds": 53,
     "image": "img/Flags/Italy.png",
     "track_image": "img/Tracks/MonzaTrack.png"
   },
@@ -29,6 +31,7 @@ const tracksData = [
     "rain_chance": 0.5,
     "base_reward": 100000,
     "difficulty": 2,
+    "rounds": 71,
     "image": "img/Flags/Austria.png",
     "track_image": "img/Tracks/SpielbergTrack.png"
   },
@@ -40,6 +43,7 @@ const tracksData = [
     "rain_chance": 0.55,
     "base_reward": 140000,
     "difficulty": 3,
+    "rounds": 52,
     "image": "img/Flags/UK.png",
     "track_image": "img/Tracks/SilverstoneTrack.png"
   },
@@ -51,6 +55,7 @@ const tracksData = [
     "rain_chance": 1.0,
     "base_reward": 150000,
     "difficulty": 3,
+    "rounds": 44,
     "image": "img/Flags/Belgium.png",
     "track_image": "img/Tracks/SpaTrack.png"
   },
@@ -62,6 +67,7 @@ const tracksData = [
     "rain_chance": 0.35,
     "base_reward": 135000,
     "difficulty": 4,
+    "rounds": 52,
     "image": "img/Flags/Japan.png",
     "track_image": "img/Tracks/SuzukaTrack.png"
   },
@@ -73,6 +79,7 @@ const tracksData = [
     "rain_chance": 0.20,
     "base_reward": 200000,
     "difficulty": 5,
+    "rounds": 78,
     "image": "img/Flags/Monaco.png",
     "track_image": "img/Tracks/MonacoTrack.png"
   },
@@ -84,6 +91,7 @@ const tracksData = [
     "rain_chance": 0.40,
     "base_reward": 160000,
     "difficulty": 5,
+    "rounds": 62,
     "image": "img/Flags/Singapore.png",
     "track_image": "img/Tracks/SingaporeTrack.png"
   }
