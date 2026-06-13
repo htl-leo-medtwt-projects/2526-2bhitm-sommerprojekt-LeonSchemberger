@@ -846,6 +846,19 @@ button:hover {
     transform: scale(1.05);
 }
 
+#music-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+#music-toggle-btn:active {
+    transform: scale(0.95);
+}
+
 /* ==================================================
                         Images
 ================================================== */
@@ -962,6 +975,12 @@ button:hover {
 
 .img-small img {
     width: 230px;
+}
+
+#music-toggle-btn img {
+    width: 200px;
+    height: auto;
+    display: block;
 }
 
 /* ==================================================

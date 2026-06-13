@@ -11,6 +11,11 @@
 
 <body>
 
+    <button id="music-toggle-btn" onclick="toggleMusic(event)">
+        <img id="music-off-img" src="../img/Btns/MusicOff.png">
+        <img id="music-on-img" src="../img/Btns/MusicOn.png" style="display: none;">
+    </button>
+
     <div id="howto-menu">
         <div id="rules-panel">
             <img src="../img/UI Panels/Regeln.png">
@@ -50,11 +55,41 @@
         </div>
 
         <a href="../index.html">
-            <button id="back-btn">
+            <button id="back-btn" onclick="goBackFromInfo()">
                 <img src="../img/Btns/BackBtn.png">
             </button>
         </a>
     </div>
+
+    <script>
+        let infoMusic = new Audio('../sounds/music/rules.mp3');
+        infoMusic.loop = true;
+        infoMusic.volume = 0.35;
+        let isMuted = true;
+
+        function toggleMusic(event) {
+            event.stopPropagation();
+
+            const onImg = document.getElementById('music-on-img');
+            const offImg = document.getElementById('music-off-img');
+
+            if (isMuted) {
+                infoMusic.play().catch(err => console.log("Fehler beim Einschalten"));
+                onImg.style.display = 'block';
+                offImg.style.display = 'none';
+                isMuted = false;
+            } else {
+                infoMusic.pause();
+                onImg.style.display = 'none';
+                offImg.style.display = 'block';
+                isMuted = true;
+            }
+        }
+
+        function goBackFromInfo() {
+            infoMusic.pause();
+        }
+    </script>
 
 </body>
 
