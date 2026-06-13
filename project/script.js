@@ -548,6 +548,10 @@ function raceDecision() {
     document.getElementById('race-start-lights').style.display = 'none';
     document.getElementById('race-event-screen').style.display = 'flex';
 
+    const currentTrack = tracksData[currentRaceIndex];
+    currentRaceRound = Math.floor(Math.random() * 25) + 10;
+    document.getElementById('current-race-round-display').innerHTML = `RUNDE ${currentRaceRound} / ${currentTrack.rounds}`;
+
     const eventIndex = currentRaceIndex % raceEvents.length;
     activeEvent = raceEvents[eventIndex];
 
