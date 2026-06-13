@@ -12,8 +12,8 @@
 <body>
 
     <button id="music-toggle-btn" onclick="toggleMusic(event)">
-        <img id="music-off-img" src="../img/Btns/MusicOff.png">
-        <img id="music-on-img" src="../img/Btns/MusicOn.png" style="display: none;">
+        <img id="music-off-img" src="../img/Btns/MusicOff.png" style="display: none;">
+        <img id="music-on-img" src="../img/Btns/MusicOn.png">
     </button>
 
     <div id="howto-menu">
@@ -64,8 +64,10 @@
     <script>
         let infoMusic = new Audio('../sounds/music/rules.mp3');
         infoMusic.loop = true;
-        infoMusic.volume = 0.35;
-        let isMuted = true;
+        infoMusic.volume = 0.20;
+        let isMuted = false;
+
+        infoMusic.play();
 
         function toggleMusic(event) {
             event.stopPropagation();
@@ -74,7 +76,7 @@
             const offImg = document.getElementById('music-off-img');
 
             if (isMuted) {
-                infoMusic.play().catch(err => console.log("Fehler beim Einschalten"));
+                infoMusic.play();
                 onImg.style.display = 'block';
                 offImg.style.display = 'none';
                 isMuted = false;

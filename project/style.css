@@ -649,6 +649,7 @@ p {
     width: 350px;
     display: block;
 }
+
 /* ==================================================
                    Race Results
 ================================================== */
@@ -848,15 +849,20 @@ button:hover {
 
 #music-toggle-btn {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 60px;
+    right: 60px;
     padding: 0;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    animation: fadeInDown 1.2s ease forwards;
 }
 
-#music-toggle-btn:active {
-    transform: scale(0.95);
+#menu-music-toggle-btn {
+    position: fixed;
+    left: 60px;
+    bottom: 60px;
+    padding: 0;
+    cursor: pointer;
+    animation: fadeInUp 1.2s ease forwards;
 }
 
 /* ==================================================
@@ -978,11 +984,26 @@ button:hover {
 }
 
 #music-toggle-btn img {
-    width: 200px;
+    width: 90px;
     height: auto;
     display: block;
+    transition: transform 0.2s ease;
 }
 
+#music-toggle-btn img:hover {
+    transform: scale(1.10);
+}
+
+#menu-music-toggle-btn img {
+    width: 90px;
+    height: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+#menu-music-toggle-btn img:hover {
+    transform: scale(1.10);
+}
 /* ==================================================
                      Animationen
 ================================================== */

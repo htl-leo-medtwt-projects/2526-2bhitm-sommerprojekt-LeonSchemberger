@@ -41,8 +41,25 @@ let decisionImpact = {
 };
 
 function backHome() {
+    if (typeof resultMusic !== 'undefined') {
+        resultMusic.pause();
+        resultMusic.currentTime = 0;
+    }
+
     document.getElementById('race-results').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
+
+    if (!isMenuMuted && typeof menuMusic !== 'undefined') {
+        menuMusic.currentTime = 0;
+        menuMusic.play();
+
+        const onImg = document.getElementById('char-music-on-img');
+        const offImg = document.getElementById('char-music-off-img');
+        if (onImg && offImg) {
+            onImg.style.display = 'block';
+            offImg.style.display = 'none';
+        }
+    }
 
     //Damit der Slider, bei einem neuen Rennen, wieder auf die erste Seite zurückspringt, wurde Gemini gefragt
     if (typeof swiper !== 'undefined') {
@@ -236,6 +253,20 @@ function savePlayer() {
 
     updateHub();
     wmStanding();
+
+    if (typeof menuMusic !== 'undefined') {
+        isMenuMuted = false;
+        menuMusic.currentTime = 0;
+        menuMusic.play();
+
+        const onImg = document.getElementById('menu-music-on-img');
+        const offImg = document.getElementById('menu-music-off-img');
+
+        if (onImg && offImg) {
+            onImg.style.display = 'block';
+            offImg.style.display = 'none';
+        }
+    }
 }
 
 let selectedStrategy = {
@@ -510,6 +541,14 @@ function startRace() {
 
     updateHub();
     wmStanding();
+
+    if (typeof menuMusic !== 'undefined') {
+        menuMusic.pause();
+    }
+
+    isResultMuted = false;
+    resultMusic.currentTime = 0;
+    resultMusic.play();
 }
 
 const swiper = new Swiper('.swiper', {
@@ -730,7 +769,36 @@ function playRadioMessage(audioPath) {
 
     currentRadioAudio = new Audio(audioPath);
 
-    currentRadioAudio.play().catch(error => {
-        console.error("Fehler beim Abspielen der Audiodatei:", error);
-    });
+    currentRadioAudio.play();
+}
+
+let menuMusic = new Audio('sounds/music/menu.mp3');
+menuMusic.loop = true;
+menuMusic.volume = 0.35;
+let isMenuMuted = true;
+
+let resultMusic = new Audio('sounds/music/result.mp3');
+resultMusic.loop = true;
+resultMusic.volume = 0.35;
+let isResultMuted = false;
+
+function toggleMenuMusic(event) {
+    event.stopPropagation();
+
+    const onImg = document.getElementById('menu-music-on-img');
+    const offImg = document.getElementById('menu-music-off-img');
+
+    if (!onImg || !offImg) return;
+
+    if (isMenuMuted) {
+        menuMusic.play();
+        onImg.style.display = 'block';
+        offImg.style.display = 'none';
+        isMenuMuted = false;
+    } else {
+        menuMusic.pause();
+        onImg.style.display = 'none';
+        offImg.style.display = 'block';
+        isMenuMuted = true;
+    }
 }
