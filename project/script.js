@@ -552,6 +552,31 @@ function raceDecision() {
     currentRaceRound = Math.floor(Math.random() * 25) + 10;
     document.getElementById('current-race-round-display').innerHTML = `RUNDE ${currentRaceRound} / ${currentTrack.rounds}`;
 
+    let baseWearPerRound = 2.5;
+    if (selectedStrategy.tire === 'SOFT') baseWearPerRound = 4.5;
+    if (selectedStrategy.tire === 'HARD') baseWearPerRound = 1.5;
+    if (selectedStrategy.tire === 'WET' || selectedStrategy.tire === 'INTER') baseWearPerRound = 3.5;
+
+    let aggressionMultiplier = 1.0;
+    if (selectedStrategy.aggression === 'risiko') aggressionMultiplier = 1.4;
+    if (selectedStrategy.aggression === 'calm') aggressionMultiplier = 0.7;
+
+    let randomFactor = (Math.random() * 6) - 3; 
+    //Damit die Reifen realsitsch abnutzen, wurde Gemini gefragt 
+    tireWear = Math.min(Math.floor((baseWearPerRound * aggressionMultiplier * currentRaceRound) + randomFactor), 100);
+    if (tireWear < 0) tireWear = 0;
+
+    const wearDisplay = document.getElementById('current-wear-value');
+    wearDisplay.innerHTML = `${tireWear}%`;
+
+    if (tireWear > 75) {
+        wearDisplay.style.color = '#e10600';
+    } else if (tireWear > 45) {
+        wearDisplay.style.color = '#ffaa00';
+    } else {
+        wearDisplay.style.color = '#00ff88';
+    }
+
     const eventIndex = currentRaceIndex % raceEvents.length;
     activeEvent = raceEvents[eventIndex];
 
