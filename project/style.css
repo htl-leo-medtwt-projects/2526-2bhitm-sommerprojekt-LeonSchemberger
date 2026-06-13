@@ -740,7 +740,7 @@ p {
 
 #tire-telemetry-display {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     background: rgba(0, 0, 0, 0.85);
     border: 2px solid #e10600;
