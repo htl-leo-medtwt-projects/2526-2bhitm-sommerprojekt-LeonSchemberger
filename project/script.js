@@ -540,8 +540,8 @@ document.querySelectorAll('.box-style button').forEach(button => {
 });
 
 let activeEvent = null;
-
 let currentRaceRound = 0;
+let currentRadioAudio = null;
 
 function raceDecision() {
     if (!raceEvents || raceEvents.length === 0) return;
@@ -585,10 +585,19 @@ function raceDecision() {
     document.getElementById('race-event-screen').style.backgroundImage = `url('img/Backgrounds/Entscheidungen/${activeEvent.image}')`;
     document.getElementById('event-btn-1').innerHTML = activeEvent.btn1Text;
     document.getElementById('event-btn-2').innerHTML = activeEvent.btn2Text;
+
+    if (activeEvent && activeEvent.audio) {
+        playRadioMessage(activeEvent.audio);
+    }
 }
 
 function handleEventDecision(decisionNumber) {
     if (!activeEvent) return;
+
+    if (currentRadioAudio) {
+        currentRadioAudio.pause();
+        currentRadioAudio.currentTime = 0;
+    }
 
     decisionImpact.scoreBonus = 0;
     decisionImpact.additionalDnfChance = 0;
@@ -711,4 +720,17 @@ function handleEventDecision(decisionNumber) {
     document.getElementById('race-results').style.display = 'flex';
 
     startRace();
+}
+
+function playRadioMessage(audioPath) {
+    if (currentRadioAudio) {
+        currentRadioAudio.pause();
+        currentRadioAudio.currentTime = 0;
+    }
+
+    currentRadioAudio = new Audio(audioPath);
+
+    currentRadioAudio.play().catch(error => {
+        console.error("Fehler beim Abspielen der Audiodatei:", error);
+    });
 }
