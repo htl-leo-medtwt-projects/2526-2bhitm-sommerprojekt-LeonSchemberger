@@ -1,17 +1,69 @@
+//Soundeffects
+const audioFiles = {
+    beep: new Audio('sounds/effects/beep.mp3'),
+    save: new Audio('sounds/effects/save.mp3'),
+    woosh: new Audio('sounds/effects/woosh.mov'),
+    radio: new Audio('sounds/effects/radio.mp3'),
+    goal: new Audio('sounds/effects/goal.mp3'),
+    tire: new Audio('sounds/effects/tire.mp3'),
+    setup: new Audio('sounds/effects/setup.mp3'),
+    payout: new Audio('sounds/effects/payout.mp3'),
+    abreisen: new Audio('sounds/effects/abreisen.mov'),
+    ampeln: new Audio('sounds/effects/ampeln.mov'),
+    aggression: new Audio('sounds/effects/aggression.mp3')
+};
+
+function play(soundName) {
+    if (audioFiles[soundName]) {
+        audioFiles[soundName].currentTime = 0;
+        audioFiles[soundName].play();
+    }
+}
+
 function createCharakter() {
     document.getElementById('start-menu').style.display = 'none';
     document.getElementById('char-creator').style.display = 'flex';
+    play('beep');
+}
+
+function savePlayer() {
+    player.name = document.getElementById("player-name").value;
+    player.team = document.getElementById("team-select").value;
+
+    replaceWorstDriver(player.team);
+
+    document.getElementById('char-creator').style.display = 'none';
+    document.getElementById('career-hub').style.display = 'flex';
+
+    updateHub();
+    wmStanding();
+
+    if (typeof menuMusic !== 'undefined') {
+        isMenuMuted = false;
+        menuMusic.currentTime = 0;
+        menuMusic.play();
+
+        const onImg = document.getElementById('menu-music-on-img');
+        const offImg = document.getElementById('menu-music-off-img');
+
+        if (onImg && offImg) {
+            onImg.style.display = 'block';
+            offImg.style.display = 'none';
+        }
+    }
+    play('save');
 }
 
 function raceCalendar() {
     document.getElementById('career-hub').style.display = 'none';
     document.getElementById('race-calendar').style.display = 'flex';
+    play('woosh');
 }
 
-function loadingScreen() {
-    document.getElementById('race-prep').style.display = 'none';
-    document.getElementById('race-start-lights').style.display = 'flex';
-    runLights();
+function careerHub() {
+    document.getElementById('race-calendar').style.display = 'none';
+    document.getElementById('career-hub').style.display = 'flex';
+    play('woosh');
 }
 
 function depart() {
@@ -27,11 +79,13 @@ function depart() {
     document.getElementById('career-hub').style.display = 'none';
     document.getElementById('race-prep').style.display = 'flex';
     generateWeather(currentRaceIndex);
+    play('abreisen');
 }
 
-function careerHub() {
-    document.getElementById('race-calendar').style.display = 'none';
-    document.getElementById('career-hub').style.display = 'flex';
+function loadingScreen() {
+    document.getElementById('race-prep').style.display = 'none';
+    document.getElementById('race-start-lights').style.display = 'flex';
+    runLights();
 }
 
 let decisionImpact = {
@@ -152,6 +206,7 @@ function selectGoal(target, reward) {
     selectedStrategy.goal = target;
     selectedStrategy.goalReward = reward;
     checkStrategy();
+    play('goal');
 }
 
 function wmStanding() {
@@ -250,33 +305,6 @@ function replaceWorstDriver(selectedTeamName) {
     }
 }
 
-function savePlayer() {
-    player.name = document.getElementById("player-name").value;
-    player.team = document.getElementById("team-select").value;
-
-    replaceWorstDriver(player.team);
-
-    document.getElementById('char-creator').style.display = 'none';
-    document.getElementById('career-hub').style.display = 'flex';
-
-    updateHub();
-    wmStanding();
-
-    if (typeof menuMusic !== 'undefined') {
-        isMenuMuted = false;
-        menuMusic.currentTime = 0;
-        menuMusic.play();
-
-        const onImg = document.getElementById('menu-music-on-img');
-        const offImg = document.getElementById('menu-music-off-img');
-
-        if (onImg && offImg) {
-            onImg.style.display = 'block';
-            offImg.style.display = 'none';
-        }
-    }
-}
-
 let selectedStrategy = {
     goal: 0,
     tire: "",
@@ -305,9 +333,20 @@ function generateWeather(trackIndex) {
     }
 }
 
-function selectTire(tireType) { selectedStrategy.tire = tireType; checkStrategy(); }
-function selectSetup(setupType) { selectedStrategy.setup = setupType; checkStrategy(); }
-function selectAggression(aggressionType) { selectedStrategy.aggression = aggressionType; checkStrategy(); }
+function selectTire(tireType) {
+    selectedStrategy.tire = tireType; checkStrategy();
+    play('tire');
+}
+
+function selectSetup(setupType) {
+    selectedStrategy.setup = setupType; checkStrategy();
+    play('setup');
+}
+
+function selectAggression(aggressionType) {
+    selectedStrategy.aggression = aggressionType; checkStrategy();
+    play('aggression');
+}
 
 function calculateRacePerformance(driver, myPlayer, track) {
     let team = teamsData.find(t => driver && driver.team && t.name.toLowerCase().includes(driver.team.toLowerCase()));
@@ -373,34 +412,27 @@ function runLights() {
     const bulbs = document.querySelectorAll('.light-bulb');
     const goBtn = document.getElementById('lights-go-btn');
 
-    bulbs[0].classList.remove('red', 'green');
-    bulbs[1].classList.remove('red', 'green');
-    bulbs[2].classList.remove('red', 'green');
-    bulbs[3].classList.remove('red', 'green');
-    bulbs[4].classList.remove('red', 'green');
+    bulbs.forEach(b => b.classList.remove('red', 'green'));
     goBtn.style.display = 'none';
 
-    setTimeout(() => { bulbs[0].classList.add('red'); }, 1000);
-    setTimeout(() => { bulbs[1].classList.add('red'); }, 2000);
-    setTimeout(() => { bulbs[2].classList.add('red'); }, 3000);
-    setTimeout(() => { bulbs[3].classList.add('red'); }, 4000);
-    setTimeout(() => { bulbs[4].classList.add('red'); }, 5000);
+    const activateLight = (index) => {
+        bulbs[index].classList.add('red');
+        play('ampeln');
+    };
+
+    setTimeout(() => activateLight(0), 1000);
+    setTimeout(() => activateLight(1), 2000);
+    setTimeout(() => activateLight(2), 3000);
+    setTimeout(() => activateLight(3), 4000);
+    setTimeout(() => activateLight(4), 5000);
 
     const waitTime = 2000 + Math.random() * 1000;
 
     setTimeout(() => {
-        bulbs[0].classList.remove('red');
-        bulbs[1].classList.remove('red');
-        bulbs[2].classList.remove('red');
-        bulbs[3].classList.remove('red');
-        bulbs[4].classList.remove('red');
-
-        bulbs[0].classList.add('green');
-        bulbs[1].classList.add('green');
-        bulbs[2].classList.add('green');
-        bulbs[3].classList.add('green');
-        bulbs[4].classList.add('green');
-
+        bulbs.forEach(b => {
+            b.classList.remove('red');
+            b.classList.add('green');
+        });
         goBtn.style.display = 'block';
     }, 5000 + waitTime);
 }
@@ -528,6 +560,8 @@ function startRace() {
     boxes[2].style.animationDelay = '2.2s';
 
     setTimeout(() => {
+        play('payout');
+
         let startTime = null;
         const duration = 1500;
 
@@ -775,9 +809,12 @@ function playRadioMessage(audioPath) {
         currentRadioAudio.currentTime = 0;
     }
 
-    currentRadioAudio = new Audio(audioPath);
+    play('radio');
 
-    currentRadioAudio.play();
+    setTimeout(() => {
+        currentRadioAudio = new Audio(audioPath);
+        currentRadioAudio.play();
+    }, 800);
 }
 
 let menuMusic = new Audio('sounds/music/menu.mp3');
