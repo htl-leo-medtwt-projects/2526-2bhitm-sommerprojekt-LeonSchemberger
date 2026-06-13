@@ -221,8 +221,16 @@ function updateHub() {
     document.querySelectorAll('.track-card').forEach((card, index) => {
         if (index === displayIndex) {
             card.classList.add('active');
+            card.style.opacity = "1";
+            card.style.filter = "none";
+        } else if (index < currentRaceIndex) {
+            card.classList.remove('active');
+            card.style.opacity = "0.4";
+            card.style.filter = "grayscale(1) brightness(0.7)";
         } else {
             card.classList.remove('active');
+            card.style.opacity = "1";
+            card.style.filter = "none";
         }
     });
 }

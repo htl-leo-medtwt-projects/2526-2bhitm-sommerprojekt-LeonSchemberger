@@ -211,15 +211,6 @@ h1 {
     animation: fadeInRight 1s 0.1s ease forwards;
 }
 
-#error {
-    font-family: F1 text;
-    color: #e10600;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    font-size: larger;
-}
-
 /* ==================================================
                      Career Hub
 ================================================== */
@@ -418,18 +409,6 @@ p {
     border-color: #e10600;
     box-shadow: 0 0 15px rgba(225, 6, 0, 0.5);
     transform: scale(1.05);
-}
-
-.track-card.completed {
-    border-color: #2ecc71;
-    opacity: 0.7;
-}
-
-.track-card.completed::after {
-    content: "✓";
-    color: #2ecc71;
-    display: block;
-    font-weight: bold;
 }
 
 /* ==================================================
