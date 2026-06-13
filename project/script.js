@@ -72,6 +72,7 @@ function backHome() {
 
 let currentRaceIndex = 0;
 let tireWear = 0;
+let tireHealth = 100;
 
 let player = {
     name: "",
@@ -343,8 +344,8 @@ function runLights() {
     setTimeout(() => { bulbs[0].classList.add('red'); }, 1000);
     setTimeout(() => { bulbs[1].classList.add('red'); }, 2000);
     setTimeout(() => { bulbs[2].classList.add('red'); }, 3000);
-    setTimeout(() => { bulbs[3].classList.add('red'); }, 4000); 
-    setTimeout(() => { bulbs[4].classList.add('red'); }, 5000); 
+    setTimeout(() => { bulbs[3].classList.add('red'); }, 4000);
+    setTimeout(() => { bulbs[4].classList.add('red'); }, 5000);
 
     const waitTime = 2000 + Math.random() * 1000;
 
@@ -552,26 +553,27 @@ function raceDecision() {
     currentRaceRound = Math.floor(Math.random() * 25) + 10;
     document.getElementById('current-race-round-display').innerHTML = `RUNDE ${currentRaceRound} / ${currentTrack.rounds}`;
 
-    let baseWearPerRound = 2.5;
-    if (selectedStrategy.tire === 'SOFT') baseWearPerRound = 4.5;
-    if (selectedStrategy.tire === 'HARD') baseWearPerRound = 1.5;
+    let baseWearPerRound = 2.0;
+    if (selectedStrategy.tire === 'SOFT') baseWearPerRound = 3.0;
+    if (selectedStrategy.tire === 'HARD') baseWearPerRound = 1.0;
     if (selectedStrategy.tire === 'WET' || selectedStrategy.tire === 'INTER') baseWearPerRound = 3.5;
 
     let aggressionMultiplier = 1.0;
     if (selectedStrategy.aggression === 'risiko') aggressionMultiplier = 1.4;
     if (selectedStrategy.aggression === 'calm') aggressionMultiplier = 0.7;
 
-    let randomFactor = (Math.random() * 6) - 3; 
+    let randomFactor = (Math.random() * 6) - 3;
     //Damit die Reifen realsitsch abnutzen, wurde Gemini gefragt 
     tireWear = Math.min(Math.floor((baseWearPerRound * aggressionMultiplier * currentRaceRound) + randomFactor), 100);
     if (tireWear < 0) tireWear = 0;
+    tireHealth = 100 - tireWear;
 
     const wearDisplay = document.getElementById('current-wear-value');
-    wearDisplay.innerHTML = `${tireWear}%`;
+    wearDisplay.innerHTML = `${tireHealth}%`;
 
-    if (tireWear > 75) {
+    if (tireHealth < 25) {
         wearDisplay.style.color = '#e10600';
-    } else if (tireWear > 45) {
+    } else if (tireHealth < 55) {
         wearDisplay.style.color = '#ffaa00';
     } else {
         wearDisplay.style.color = '#00ff88';
@@ -580,7 +582,7 @@ function raceDecision() {
     const eventIndex = currentRaceIndex % raceEvents.length;
     activeEvent = raceEvents[eventIndex];
 
-    document.getElementById('race-event-screen').style.backgroundImage = `url('img/Backgrounds/Entscheidungen/${activeEvent.image}')`; 
+    document.getElementById('race-event-screen').style.backgroundImage = `url('img/Backgrounds/Entscheidungen/${activeEvent.image}')`;
     document.getElementById('event-btn-1').innerHTML = activeEvent.btn1Text;
     document.getElementById('event-btn-2').innerHTML = activeEvent.btn2Text;
 }
@@ -588,105 +590,125 @@ function raceDecision() {
 function handleEventDecision(decisionNumber) {
     if (!activeEvent) return;
 
+    decisionImpact.scoreBonus = 0;
+    decisionImpact.additionalDnfChance = 0;
+
+    if (decisionNumber === 1) {
+        decisionImpact.chosenText = activeEvent.btn1Text;
+    } else {
+        decisionImpact.chosenText = activeEvent.btn2Text;
+    }
+
     if (activeEvent.image === "AutoQuer.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -5;
-            decisionImpact.chosenText = activeEvent.btn1Text;
-        } else {
-            decisionImpact.scoreBonus = 5;
-            decisionImpact.additionalDnfChance = 0.20;
-            decisionImpact.chosenText = activeEvent.btn2Text;
-        }
-    } 
-    
-    else if (activeEvent.image === "BoxenstoppFehler.png") {
-        if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -8;
-            decisionImpact.chosenText = activeEvent.btn1Text;
-        } else {
-            decisionImpact.chosenText = activeEvent.btn2Text;
-            if (Math.random() < 0.7) {
-                decisionImpact.scoreBonus = 7;
+            if (tireHealth < 30) {
+                decisionImpact.scoreBonus = -25;
+                decisionImpact.additionalDnfChance = 0.35;
             } else {
-                decisionImpact.additionalDnfChance = 0.5;
+                decisionImpact.scoreBonus = 8;
             }
+        } else {
+            decisionImpact.scoreBonus = -3;
+        }
+    }
+
+    else if (activeEvent.image === "BoxenstoppFehler.png") {
+        if (decisionNumber === 2) {
+            if (currentRaceRound <= 25) {
+                decisionImpact.scoreBonus = -23;
+            } else {
+                decisionImpact.scoreBonus = 10;
+            }
+        } else {
+            decisionImpact.scoreBonus = -5;
         }
     }
 
     else if (activeEvent.image === "BoxPoker.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 4;
-            decisionImpact.additionalDnfChance = 0.05;
-            decisionImpact.chosenText = activeEvent.btn1Text;
+            if (tireHealth < 35 && currentRaceRound > 20) {
+                decisionImpact.scoreBonus = -40;
+                decisionImpact.additionalDnfChance = 0.50;
+            } else {
+                decisionImpact.scoreBonus = 12;
+            }
         } else {
-            decisionImpact.scoreBonus = -6;
-            decisionImpact.chosenText = activeEvent.btn2Text;
+            decisionImpact.scoreBonus = -10;
         }
     }
 
     else if (activeEvent.image === "Bremsduell.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 7;
-            decisionImpact.additionalDnfChance = 0.30;
-            decisionImpact.chosenText = activeEvent.btn1Text;
+            if (tireHealth < 30) {
+                decisionImpact.scoreBonus = -30;
+                decisionImpact.additionalDnfChance = 0.40;
+            } else {
+                decisionImpact.scoreBonus = 10;
+            }
         } else {
-            decisionImpact.scoreBonus = 1;
-            decisionImpact.chosenText = activeEvent.btn2Text;
+            decisionImpact.scoreBonus = 5;
         }
     }
 
     else if (activeEvent.image === "Motor.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 10;
-            decisionImpact.chosenText = activeEvent.btn1Text;
-            if (Math.random() < 0.55) {
-                decisionImpact.additionalDnfChance = 0.4;
+            if (currentRaceRound <= 28) {
+                decisionImpact.scoreBonus = -35;
+                decisionImpact.additionalDnfChance = 0.60;
+            } else {
+                decisionImpact.scoreBonus = 15;
             }
         } else {
-            decisionImpact.scoreBonus = -2;
-            decisionImpact.chosenText = activeEvent.btn2Text;
+            decisionImpact.scoreBonus = -5;
         }
     }
 
     else if (activeEvent.image === "Platten.png") {
-        if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = -12;
-            decisionImpact.chosenText = activeEvent.btn1Text;
-        } else {
-            decisionImpact.chosenText = activeEvent.btn2Text;
-            if (Math.random() < 0.50) {
-                decisionImpact.scoreBonus = 2;
+        tireHealth = 0;
+        if (decisionNumber === 2) {
+            if (currentRaceRound <= 49) {
+                decisionImpact.scoreBonus = -50;
             } else {
-                decisionImpact.additionalDnfChance = 0.4;
+                decisionImpact.scoreBonus = 5;
             }
+        } else {
+            decisionImpact.scoreBonus = -10;
         }
     }
 
     else if (activeEvent.image === "Regen.png") {
-        if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 3;
-            decisionImpact.chosenText = activeEvent.btn1Text;
+        if (decisionNumber === 2) {
+            if (tireHealth < 50 || currentRaceRound <= 75) {
+                decisionImpact.scoreBonus = -40;
+                decisionImpact.additionalDnfChance = 0.60;
+            } else {
+                decisionImpact.scoreBonus = 20;
+            }
         } else {
-            decisionImpact.scoreBonus = -40;
-            decisionImpact.additionalDnfChance = 0.60;
-            decisionImpact.chosenText = activeEvent.btn2Text;
+            decisionImpact.scoreBonus = 5;
         }
     }
 
     else if (activeEvent.image === "Unfall.png") {
         if (decisionNumber === 1) {
-            decisionImpact.scoreBonus = 4;
-            decisionImpact.chosenText = activeEvent.btn1Text;
+            if (tireHealth < 40 || currentRaceRound <= 22) {
+                decisionImpact.scoreBonus = 15;
+            } else {
+                decisionImpact.scoreBonus = -20;
+            }
         } else {
-            decisionImpact.scoreBonus = -1;
-            decisionImpact.additionalDnfChance = 0.20;
-            decisionImpact.chosenText = activeEvent.btn2Text;
+            if (tireHealth < 40 || currentRaceRound <= 22) {
+                decisionImpact.scoreBonus = -35;
+                decisionImpact.additionalDnfChance = 0.30;
+            } else {
+                decisionImpact.scoreBonus = 10;
+            }
         }
     }
 
     document.getElementById('race-event-screen').style.display = 'none';
     activeEvent = null;
-
     document.getElementById('race-results').style.display = 'flex';
+
     startRace();
 }
