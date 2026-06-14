@@ -769,13 +769,20 @@ p {
 }
 
 .summary-modal-content {
+    width: 900px;
     background: #222;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    padding: 20px;
     color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
     border: 2px solid #444;
     animation: fadeInDown 1.2s ease forwards;
+    text-align: center;
 }
 
 .summary-modal-content h1 {
@@ -911,6 +918,10 @@ button:hover {
 #back-btn img {
     width: 350px;
     animation: fadeInUp 1s ease forwards;
+}
+
+#summary-btn img {
+    width: 250px;
 }
 
 .hub-btn img {
