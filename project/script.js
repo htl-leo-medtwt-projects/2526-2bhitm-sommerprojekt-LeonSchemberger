@@ -1005,6 +1005,8 @@ function handleSeasonDecision(accepted) {
         localStorage.setItem("playerMoney", player.money);
 
         if (currentEvent.type === "transfer") {
+            let oldTeamName = player.team;
+
             player.team = currentEvent.team;
             localStorage.setItem("playerTeam", player.team);
 
@@ -1017,10 +1019,20 @@ function handleSeasonDecision(accepted) {
                 oldPerf = myTeam.car_performance;
             }
 
-            if (typeof replaceWorstDriver === 'function') {
-                replaceWorstDriver(player.team);
+            let teamDrivers = [];
+            for (let i = 0; i < driversData.length; i++) {
+                if (driversData[i].team === player.team) {
+                    teamDrivers.push(driversData[i]);
+                }
             }
 
+            if (teamDrivers.length > 0) {
+                teamDrivers.sort((a, b) => a.skill - b.skill);
+                let driverToTransfer = teamDrivers[0];
+
+                driverToTransfer.team = oldTeamName;
+                console.log(`${driverToTransfer.name} wurde zu ${oldTeamName} transferiert, um deinen alten Platz zu füllen.`);
+            }
         }
         else {
             if (myTeam) {
