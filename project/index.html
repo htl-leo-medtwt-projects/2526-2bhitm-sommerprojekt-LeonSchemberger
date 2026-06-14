@@ -52,18 +52,9 @@
                 <select id="team-select">
                     <option value="" disabled selected>Team wählen...</option>
 
-                    <option value="Haas">Haas F1 Team (Kostenlos)</option>
-                    <option value="Audi">Audi (Kostenlos)</option>
-                    <option value="Williams">Williams (Kostenlos)</option>
-
-                    <option value="Cadillac" disabled>Cadillac - 250.000 €</option>
-                    <option value="Alpine" disabled>Alpine - 500.000 €</option>
-                    <option value="Racing Bulls" disabled>Racing Bulls - 750.000 €</option>
-                    <option value="Aston Martin" disabled>Aston Martin - 1.200.000 €</option>
-                    <option value="Mercedes" disabled>Mercedes - 2.500.000 €</option>
-                    <option value="McLaren" disabled>McLaren - 3.000.000 €</option>
-                    <option value="Ferrari" disabled>Ferrari - 4.500.000 €</option>
-                    <option value="Red Bull Racing" disabled>Red Bull Racing - 6.000.000 €</option>
+                    <option value="Haas">Haas F1 Team</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Williams">Williams</option>
                 </select>
             </div>
 
@@ -392,6 +383,19 @@
             <button id="summary-btn" onclick="startNewSeason()">
                 <img src="img/Btns/NeueSaison.png">
             </button>
+        </div>
+    </section>
+
+    <!-- ---------------Season Event--------------- -->
+    <section id="season-event-screen" style="display: none;">
+        <div class="event-box" id="season-event-content">
+            <h2 id="event-title"></h2>
+            <div id="event-current-money"></div>
+            <p id="event-desc"></p>
+            <div class="event-buttons">
+                <button id="season-btn-1" onclick="handleSeasonDecision(true)"></button>
+                <button id="season-btn-2" onclick="handleSeasonDecision(false)"></button>
+            </div>
         </div>
     </section>
 </body>

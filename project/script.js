@@ -875,3 +875,103 @@ function toggleMenuMusic(event) {
         isMenuMuted = true;
     }
 }
+
+function startNewSeason() {
+    document.getElementById('season-summary-screen').style.display = 'none';
+    document.getElementById('race-results').style.display = 'none';
+
+    const creator = document.getElementById('char-creator');
+    creator.style.display = 'flex';
+    creator.classList.add('blur-active');
+
+    player.points = 0;
+    currentRaceIndex = 0;
+    tireWear = 0;
+    tireHealth = 100;
+    driversData.forEach(d => d.points = 0);
+
+    if (typeof swiper !== 'undefined') {
+        swiper.slideTo(0, 0);
+    }
+
+    selectedStrategy = {
+        goal: 0,
+        tire: "",
+        setup: "",
+        aggression: "",
+        isRainRace: false
+    };
+
+    document.querySelectorAll('.box-style button').forEach(button => {
+        button.classList.remove('selected');
+    });
+
+    checkStrategy();
+    prepareSeasonEvents();
+}
+
+let currentEvent = null;
+
+function prepareSeasonEvents() {
+    let allDrivers = [...driversData, { name: player.name + " (DU)", points: player.points }];
+    allDrivers.sort((a, b) => b.points - a.points);
+    let playerRank = allDrivers.findIndex(d => d.name === player.name + " (DU)") + 1;
+
+    let possibleTransfers = [];
+
+    if (possibleTransfers.length > 0 && Math.random() < 0.5) {
+        currentEvent = possibleTransfers[Math.floor(Math.random() * possibleTransfers.length)];
+    } else if (typeof seasonEvents !== 'undefined' && seasonEvents.length > 0) {
+        currentEvent = seasonEvents[Math.floor(Math.random() * seasonEvents.length)];
+    }
+
+    document.getElementById('event-title').textContent = currentEvent.title;
+    document.getElementById('event-desc').textContent = currentEvent.desc;
+    document.getElementById('event-current-money').innerHTML = `Dein Budget: <b>${player.money.toLocaleString()} €</b>`;
+
+    let text1 = currentEvent.btn1Text ? currentEvent.btn1Text : "Annehmen";
+    let text2 = currentEvent.btn2Text ? currentEvent.btn2Text : "Ablehnen";
+
+    document.getElementById('season-btn-1').textContent = text1;
+    document.getElementById('season-btn-2').textContent = text2;
+    document.getElementById('season-event-screen').style.display = 'flex';
+}
+
+function handleSeasonDecision(accepted) {
+    let oldPerf = 70;
+    let myTeam = teamsData.find(t => t.name.toLowerCase().includes(player.team.toLowerCase()));
+    if (myTeam) oldPerf = myTeam.car_performance;
+
+    if (accepted) {
+        player.money -= currentEvent.cost;
+        localStorage.setItem("playerMoney", player.money);
+
+        if (myTeam) myTeam.car_performance += (currentEvent.effect === "boost_player" ? 5 : 2);
+    }
+
+    teamsData.forEach(t => {
+        if (t !== myTeam) t.car_performance += Math.floor(Math.random() * 7) - 2;
+    });
+
+    document.getElementById('event-title').textContent = "Winter-Tests Beendet!";
+    document.getElementById('event-desc').innerHTML = myTeam
+        ? `Dein Team hat sich entwickelt!<br><b>Performance: ${oldPerf} → ${myTeam.car_performance}</b><br><br>Die Konkurrenz hat ebenfalls Updates gebracht.`
+        : "Die Teams haben ihre Autos für die neue Saison angepasst.";
+
+    document.getElementById('season-btn-1').textContent = "In den Hub starten";
+    document.getElementById('season-btn-1').onclick = closeReportAndGoToHub;
+    document.getElementById('season-btn-2').style.display = 'none'; // Zweiten Button verstecken
+}
+
+function closeReportAndGoToHub() {
+    document.getElementById('season-btn-2').style.display = 'inline-block';
+    document.getElementById('season-btn-1').onclick = function () { handleSeasonDecision(true); };
+
+    document.getElementById('char-creator').classList.remove('blur-active');
+    document.getElementById('char-creator').style.display = 'none';
+    document.getElementById('season-event-screen').style.display = 'none';
+    document.getElementById('career-hub').style.display = 'flex';
+
+    updateHub();
+    wmStanding();
+}
