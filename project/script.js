@@ -655,7 +655,7 @@ document.querySelectorAll('.box-style button').forEach(button => {
 });
 
 document.querySelectorAll('.character-cards div').forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
         document.querySelectorAll('.character-cards div').forEach(c => c.classList.remove('selected'));
         this.classList.add('selected');
     });
@@ -678,7 +678,7 @@ function raceDecision() {
     let baseWearPerRound = 2.0;
     if (selectedStrategy.tire === 'SOFT') baseWearPerRound = 3.0;
     if (selectedStrategy.tire === 'HARD') baseWearPerRound = 1.0;
-    if (selectedStrategy.tire === 'WET' || selectedStrategy.tire === 'INTER') baseWearPerRound = 3.5;
+    if (selectedStrategy.tire === 'WET' || selectedStrategy.tire === 'INTER') baseWearPerRound = 1.0;
 
     let aggressionMultiplier = 1.0;
     if (selectedStrategy.aggression === 'risiko') aggressionMultiplier = 1.4;
@@ -894,6 +894,17 @@ function startNewSeason() {
     const raceResultsScreen = document.getElementById('race-results');
     raceResultsScreen.style.display = 'none';
     raceResultsScreen.style.filter = 'none';
+
+    if (typeof resultMusic !== 'undefined') {
+        resultMusic.pause();
+        resultMusic.currentTime = 0;
+    }
+
+    if (typeof menuMusic !== 'undefined') {
+        isMenuMuted = false;
+        menuMusic.currentTime = 0;
+        menuMusic.play();
+    }
 
     const creator = document.getElementById('char-creator');
     creator.style.display = 'flex';
