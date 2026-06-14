@@ -884,7 +884,9 @@ function toggleMenuMusic(event) {
 
 function startNewSeason() {
     document.getElementById('season-summary-screen').style.display = 'none';
-    document.getElementById('race-results').style.display = 'none';
+    const raceResultsScreen = document.getElementById('race-results');
+    raceResultsScreen.style.display = 'none';
+    raceResultsScreen.style.filter = 'none';
 
     const creator = document.getElementById('char-creator');
     creator.style.display = 'flex';
