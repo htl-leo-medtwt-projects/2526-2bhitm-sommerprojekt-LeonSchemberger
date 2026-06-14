@@ -197,6 +197,19 @@ h1 {
     justify-content: flex-end;
     align-items: center;
     padding-bottom: 80px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.character-cards .selected {
+    filter: drop-shadow(0 0 15px #e10600);
+    border-radius: 8px;
+}
+
+#char-card1 img,
+#char-card2 img,
+#char-card3 img {
+    pointer-events: none;
+    transition: transform 0.2s ease;
 }
 
 #char-card1 {
@@ -1022,8 +1035,7 @@ button:hover {
 }
 
 .box-style button.selected img {
-    filter: drop-shadow(0 0 10px #e10600) drop-shadow(0 0 5px #e10600);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .box-style button img {

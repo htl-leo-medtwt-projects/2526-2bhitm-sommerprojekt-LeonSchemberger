@@ -654,6 +654,13 @@ document.querySelectorAll('.box-style button').forEach(button => {
     });
 });
 
+document.querySelectorAll('.character-cards div').forEach(card => {
+    card.addEventListener('click', function() {
+        document.querySelectorAll('.character-cards div').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+
 let activeEvent = null;
 let currentRaceRound = 0;
 let currentRadioAudio = null;
