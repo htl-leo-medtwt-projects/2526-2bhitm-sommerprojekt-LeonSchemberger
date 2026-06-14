@@ -826,16 +826,16 @@ p {
                    Saison events
 ================================================== */
 #season-event-screen {
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    backdrop-filter: blur(15px); 
-    background: rgba(0, 0, 0, 0.7); 
-    justify-content: center; 
-    align-items: center; 
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
     z-index: 10000;
 }
 
@@ -854,9 +854,9 @@ p {
 }
 
 .event-buttons {
-    display: flex; 
-    gap: 15px; 
-    justify-content: center; 
+    display: flex;
+    gap: 15px;
+    justify-content: center;
     margin-top: 35px;
 }
 
@@ -874,7 +874,7 @@ p {
 }
 
 #char-creator {
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 #event-title {
