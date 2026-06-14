@@ -1035,7 +1035,7 @@ button:hover {
 }
 
 .box-style button.selected img {
-    transform: scale(1.2);
+    transform: scale(1.10);
 }
 
 .box-style button img {
