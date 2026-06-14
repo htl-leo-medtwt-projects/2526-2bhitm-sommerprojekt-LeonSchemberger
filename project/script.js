@@ -1,8 +1,6 @@
 // ============================================================
 // 1. SOUND & MUSIK
 // ============================================================
-
-//Soundeffects
 const audioFiles = {
     beep: new Audio('sounds/effects/beep.mp3'),
     save: new Audio('sounds/effects/save.mp3'),
@@ -16,8 +14,6 @@ const audioFiles = {
     ampeln: new Audio('sounds/effects/ampeln.mov'),
     aggression: new Audio('sounds/effects/aggression.mp3')
 };
-
-//Musik
 
 let menuMusic = new Audio('sounds/music/menu.mp3');
 menuMusic.loop = true;
@@ -1020,7 +1016,13 @@ function prepareSeasonEvents() {
         }
     }
 
-    if (possibleTransfers.length > 0 && Math.random() < 0.5) {
+    let transferChance = 0.30;
+
+    if(playerRank === 1) transferChance = 0.65;
+    else if (playerRank <= 3) transferChance = 0.45;
+    else if (playerRank >= 10) transferChance = 0.15;
+
+    if (possibleTransfers.length > 0 && Math.random() < transferChance) {
         let selectedTeam = possibleTransfers[Math.floor(Math.random() * possibleTransfers.length)];
 
         currentEvent = {
