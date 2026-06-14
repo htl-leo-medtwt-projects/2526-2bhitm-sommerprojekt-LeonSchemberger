@@ -952,8 +952,17 @@ function prepareSeasonEvents() {
 
 function handleSeasonDecision(accepted) {
     let oldPerf = 70;
-    let myTeam = teamsData.find(t => t.name.toLowerCase().includes(player.team.toLowerCase()));
-    if (myTeam) oldPerf = myTeam.car_performance;
+
+    let myTeam = null;
+    for (let i = 0; i < teamsData.length; i++) {
+        if (teamsData[i].name === player.team) {
+            myTeam = teamsData[i];
+        }
+    }
+
+    if (myTeam) {
+        oldPerf = myTeam.car_performance;
+    }
 
     if (accepted) {
         player.money -= currentEvent.cost;
@@ -968,11 +977,13 @@ function handleSeasonDecision(accepted) {
         }
     }
 
-    teamsData.forEach(t => {
+    for (let i = 0; i < teamsData.length; i++) {
+        let t = teamsData[i];
+
         if (t !== myTeam) {
             t.car_performance += Math.floor(Math.random() * 7) - 2;
         }
-    });
+    }
 
     if (myTeam) {
         document.getElementById('event-desc').innerHTML = `Dein Team hat sich entwickelt!<br><b>Performance: ${oldPerf} → ${myTeam.car_performance}</b><br><br>Die Konkurrenz hat ebenfalls Updates gebracht.`;
