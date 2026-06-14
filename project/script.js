@@ -7,7 +7,7 @@ const audioFiles = {
     woosh: new Audio('sounds/effects/woosh.mov'),
     radio: new Audio('sounds/effects/radio.mp3'),
     goal: new Audio('sounds/effects/goal.mp3'),
-    tire: new Audio('sounds/effects/tire.mp3'),
+    tire: new Audio('sounds/effects/tire.mov'),
     setup: new Audio('sounds/effects/setup.mp3'),
     payout: new Audio('sounds/effects/payout.mp3'),
     abreisen: new Audio('sounds/effects/abreisen.mov'),
