@@ -240,7 +240,10 @@ function wmStanding() {
     let table = "";
     for (let i = 0; i < allDrivers.length; i++) {
         const driver = allDrivers[i];
-        const highlightClass = driver.isPlayer ? "player-highlight" : "";
+        let highlightClass = "";
+        if (driver.isPlayer) {
+            highlightClass = "player-highlight";
+        }
 
         table += `
             <div class="driver-row ${highlightClass}">
@@ -355,7 +358,10 @@ function selectAggression(aggressionType) {
 
 function calculateRacePerformance(driver, myPlayer, track) {
     let team = teamsData.find(t => driver && driver.team && t.name.toLowerCase().includes(driver.team.toLowerCase()));
-    let carPower = team ? team.car_performance : 70;
+    let carPower = 70;
+    if (team) {
+        carPower = team.car_performance;
+    }
 
     let score = 0;
     let dnfChance = 0.02 + (track.difficulty * 0.01);
@@ -929,8 +935,15 @@ function prepareSeasonEvents() {
     document.getElementById('event-desc').textContent = currentEvent.desc;
     document.getElementById('event-current-money').innerHTML = `Dein Budget: <b>${player.money.toLocaleString()} €</b>`;
 
-    let text1 = currentEvent.btn1Text ? currentEvent.btn1Text : "Annehmen";
-    let text2 = currentEvent.btn2Text ? currentEvent.btn2Text : "Ablehnen";
+    let text1 = "Annehmen";
+    if (currentEvent.btn1Text) {
+        text1 = currentEvent.btn1Text;
+    }
+
+    let text2 = "Ablehnen";
+    if (currentEvent.btn2Text) {
+        text2 = currentEvent.btn2Text;
+    }
 
     document.getElementById('season-btn-1').textContent = text1;
     document.getElementById('season-btn-2').textContent = text2;
@@ -946,21 +959,32 @@ function handleSeasonDecision(accepted) {
         player.money -= currentEvent.cost;
         localStorage.setItem("playerMoney", player.money);
 
-        if (myTeam) myTeam.car_performance += (currentEvent.effect === "boost_player" ? 5 : 2);
+        if (myTeam) {
+            if (currentEvent.effect === "boost_player") {
+                myTeam.car_performance += 5;
+            } else {
+                myTeam.car_performance += 2;
+            }
+        }
     }
 
     teamsData.forEach(t => {
-        if (t !== myTeam) t.car_performance += Math.floor(Math.random() * 7) - 2;
+        if (t !== myTeam) {
+            t.car_performance += Math.floor(Math.random() * 7) - 2;
+        }
     });
 
+    if (myTeam) {
+        document.getElementById('event-desc').innerHTML = `Dein Team hat sich entwickelt!<br><b>Performance: ${oldPerf} → ${myTeam.car_performance}</b><br><br>Die Konkurrenz hat ebenfalls Updates gebracht.`;
+    } else {
+        document.getElementById('event-desc').innerHTML = "Die Teams haben ihre Autos für die neue Saison angepasst.";
+    }
+
     document.getElementById('event-title').textContent = "Winter-Tests Beendet!";
-    document.getElementById('event-desc').innerHTML = myTeam
-        ? `Dein Team hat sich entwickelt!<br><b>Performance: ${oldPerf} → ${myTeam.car_performance}</b><br><br>Die Konkurrenz hat ebenfalls Updates gebracht.`
-        : "Die Teams haben ihre Autos für die neue Saison angepasst.";
 
     document.getElementById('season-btn-1').textContent = "In den Hub starten";
     document.getElementById('season-btn-1').onclick = closeReportAndGoToHub;
-    document.getElementById('season-btn-2').style.display = 'none'; // Zweiten Button verstecken
+    document.getElementById('season-btn-2').style.display = 'none';
 }
 
 function closeReportAndGoToHub() {
