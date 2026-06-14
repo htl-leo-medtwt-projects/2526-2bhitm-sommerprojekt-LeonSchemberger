@@ -68,7 +68,6 @@ function careerHub() {
 
 function depart() {
     if (currentRaceIndex >= tracksData.length) {
-        alert("Keine weiteren Rennen verfügbar!");
         return;
     }
 
@@ -95,6 +94,12 @@ let decisionImpact = {
 };
 
 function backHome() {
+    if (currentRaceIndex >= tracksData.length) {
+        document.getElementById('race-results').style.filter = "blur(10px)";
+        showSeasonSummary();
+        return;
+    }
+
     if (typeof resultMusic !== 'undefined') {
         resultMusic.pause();
         resultMusic.currentTime = 0;
@@ -591,6 +596,29 @@ function startRace() {
     isResultMuted = false;
     resultMusic.currentTime = 0;
     resultMusic.play();
+}
+
+function showSeasonSummary() {
+    const summaryScreen = document.getElementById('season-summary-screen');
+    const statsDiv = document.getElementById('season-stats');
+
+    //Damit der WM-Tabellen Rang herausgefindet wird, wurde Gemini gefragt
+    let allDrivers = [...driversData, { name: player.name + " (DU)", points: player.points }];
+    allDrivers.sort((a, b) => b.points - a.points);
+    let rank = allDrivers.findIndex(d => d.name === player.name + " (DU)") + 1;
+    let worldChampion = allDrivers[0].name;
+
+    statsDiv.innerHTML = `
+        <div style="font-size: 20px; margin-bottom: 20px;">
+            <p>Weltmeister: <b style="color: #FFD700;">${worldChampion}</b></p>
+            <hr style="border: 0; border-top: 1px solid #444; margin: 10px 0;">
+            <p>Dein Team: <b>${player.team}</b></p>
+            <p>Deine Punkte: <b>${player.points}</b></p>
+            <p>Deine Platzierung: <b>Platz ${rank}</b></p>
+        </div>
+    `;
+
+    summaryScreen.style.display = 'flex';
 }
 
 const swiper = new Swiper('.swiper', {
