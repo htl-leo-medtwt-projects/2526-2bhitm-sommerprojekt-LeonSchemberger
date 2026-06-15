@@ -78,23 +78,5 @@ const seasonEvents = [
         effect: "boost_player",
         btn1Text: "Einrichtung ausbauen (-900k €)",
         btn2Text: "Nichts ändern (0 €)"
-    },
-    {
-        title: "Top-Team Angebot",
-        desc: "Ein Top-Team hat deine Leistungen beobachtet. Möchtest du wechseln?",
-        cost: 0,
-        type: "transfer",
-        effect: "team_switch",
-        btn1Text: "Vertrag annehmen",
-        btn2Text: "Team treu bleiben"
-    },
-    {
-        title: "Wechsel-Angebot",
-        desc: "Ein anderes Team sucht einen neuen Fahrer für die nächste Saison.",
-        cost: 0,
-        type: "transfer",
-        effect: "team_switch",
-        btn1Text: "Angebot annehmen",
-        btn2Text: "Ablehnen"
     }
 ];
